@@ -3,18 +3,14 @@ package restaurant.boundary;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
-import javax.swing.JLayeredPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;

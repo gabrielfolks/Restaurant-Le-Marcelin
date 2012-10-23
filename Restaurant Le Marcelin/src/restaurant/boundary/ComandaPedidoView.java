@@ -201,4 +201,10 @@ public class ComandaPedidoView {
 		JButton btnFecharComanda = new JButton("Fechar Comanda");
 		panel_2.add(btnFecharComanda, "36, 6");
 	}
+
+	public JFrame getFrmComandaRestaurant() {
+		return frmComandaRestaurant;
+	}
+	
+	
 }
