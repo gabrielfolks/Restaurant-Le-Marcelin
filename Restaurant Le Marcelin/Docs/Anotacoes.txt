@@ -1,0 +1,15 @@
+Padronização do Projeto
+
+Declaração de classes seguindo o padrão MVC:
+
+Boundaries = ClasseView;
+Controllers = ClasseController;
+Model = Classe;
+
+Declaração de componentes GUI.
+
+Seguindo sempre a abreviação da classe do componente: 
+
+JTextField => tfNomeCampo;
+JButton => btnNomeCampo;
+JRadioButton => rbNomeCampo;
