@@ -29,7 +29,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JLabel;
-
+@SuppressWarnings("all")
 public class ComandaPedidoView {
 
 	private JFrame frmComandaRestaurant;

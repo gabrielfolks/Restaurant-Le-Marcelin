@@ -17,6 +17,7 @@ import javax.swing.JSpinner;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
+@SuppressWarnings("all")
 public class AdicionarPedidoView {
 
 	private JFrame frmAdicionarPedido;
@@ -49,6 +50,7 @@ public class AdicionarPedidoView {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("serial")
 	private void initialize() {
 		frmAdicionarPedido = new JFrame();
 		frmAdicionarPedido.setTitle("Adicionar Pedido - Restaurant Le Marcelin");
