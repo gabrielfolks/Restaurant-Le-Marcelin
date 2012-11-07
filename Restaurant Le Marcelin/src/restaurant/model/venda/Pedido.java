@@ -3,7 +3,7 @@ package restaurant.model.venda;
 import java.util.Date;
 import java.util.HashSet;
 
-public class Pedido {
+public abstract class Pedido {
 	
 	private int numero;
 	private float valor;
