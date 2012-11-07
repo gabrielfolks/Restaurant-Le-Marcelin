@@ -1,4 +1,4 @@
-package restaurant.model.cliente;
+package restaurant.model.reserva;
 
 public class Cliente {
 	
