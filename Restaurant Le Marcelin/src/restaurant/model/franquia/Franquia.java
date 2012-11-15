@@ -4,27 +4,39 @@ import java.util.HashSet;
 
 public class Franquia {
 	
-	private String nome;
+	private String razao;
+	private String fantasia;
 	private String endereco;
-	private String CEP;
+	private String cep;
 	private String cidade;
 	private char estado;
+	private String cnpj;
 	private HashSet<Funcionario> funcionarios;
 	
 	public Franquia() {
-		nome = "";
+		razao = "";
+		fantasia = "";
 		endereco = "";
-		CEP = "";
+		cep = "";
 		cidade = "";
 		estado = ' ';
+		cnpj = "";
 	}
 
-	public String getNome() {
-		return nome;
+	public String getRazao() {
+		return razao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setRazao(String razao) {
+		this.razao = razao;
+	}
+	
+	public String getFantasia() {
+		return fantasia;
+	}
+	
+	public void setFantasia(String fantasia) {
+		this.fantasia = fantasia;
 	}
 
 	public String getEndereco() {
@@ -36,11 +48,11 @@ public class Franquia {
 	}
 
 	public String getCEP() {
-		return CEP;
+		return cep;
 	}
 
 	public void setCEP(String cEP) {
-		CEP = cEP;
+		cep = cEP;
 	}
 
 	public String getCidade() {
@@ -65,6 +77,14 @@ public class Franquia {
 	
 	public void removeFuncionario(Funcionario f){
 		funcionarios.add(f);
+	}
+	
+	public String getCnpj() {
+		return cnpj;
+	}
+	
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 	
 	
