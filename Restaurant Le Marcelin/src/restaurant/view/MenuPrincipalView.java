@@ -1,4 +1,4 @@
-package restaurant.boundary;
+package restaurant.view;
 
 import java.awt.EventQueue;
 

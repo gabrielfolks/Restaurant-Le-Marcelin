@@ -2,16 +2,26 @@ package restaurant.model.reserva;
 
 public class Cliente {
 	
+	private int id;
 	private String nome;
 	private String telefone;
 	private String endereco;
 	private String cpf;
 	
 	public Cliente() {
+		this.id = 0;
 		this.nome = "";
 		this.telefone = "";
 		this.endereco = "";
 		this.cpf = "";
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public String getNome() {

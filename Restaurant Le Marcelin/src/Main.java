@@ -1,4 +1,4 @@
-import restaurant.boundary.LoginView;
+import restaurant.view.LoginView;
 
 
 public class Main {
@@ -8,7 +8,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		LoginView login = new restaurant.boundary.LoginView();
+		LoginView login = new restaurant.view.LoginView();
 		login.setLocationRelativeTo(null);
 		login.setVisible(true);
 		
