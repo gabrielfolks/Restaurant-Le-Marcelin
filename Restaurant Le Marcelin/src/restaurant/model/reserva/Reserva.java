@@ -4,14 +4,24 @@ import java.util.Date;
 
 public class Reserva {
 	
+	private int id;
 	private Cliente cliente;
 	private Mesa mesa;
 	private Date data;
 	
 	public Reserva() {
+		id = 0;
 		mesa = new Mesa();
 		cliente = new Cliente();
 		data = new Date();
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public Cliente getCliente() {

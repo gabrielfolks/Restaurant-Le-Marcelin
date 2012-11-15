@@ -2,6 +2,7 @@ package restaurant.model.reserva;
 
 public class Mesa {
 	
+	
 	private int numero;
 	private String zona;
 	private boolean fumante;

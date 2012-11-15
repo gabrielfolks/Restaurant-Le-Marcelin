@@ -1,4 +1,4 @@
-package restaurant.view;
+package restaurant.view.reserva;
 
 import java.awt.EventQueue;
 
