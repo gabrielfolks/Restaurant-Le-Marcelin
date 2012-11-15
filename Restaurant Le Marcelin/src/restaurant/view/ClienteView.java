@@ -15,6 +15,13 @@ import java.text.ParseException;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class ClienteView {
 
@@ -24,6 +31,9 @@ public class ClienteView {
 	private JTextField tfEndereco;
 	private JTextField tfNome;
 	private JFormattedTextField tfTelefone;
+	private JTable table;
+	private JTextField tfBusca;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -132,7 +142,78 @@ public class ClienteView {
 		tfTelefone.setBounds(134, 150, 307, 24);
 		panel.add(tfTelefone);
 		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
+		panel_2.setBounds(12, 196, 676, 43);
+		panel.add(panel_2);
+		
+		JButton btnSalvar = new JButton("Salvar");
+		panel_2.add(btnSalvar);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		panel_2.add(btnExcluir);
+		
+		JButton btnLimpar = new JButton("Limpar");
+		panel_2.add(btnLimpar);
+		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
 		tabbedPane.addTab("Consulta", new ImageIcon(ClienteView.class.getResource("/restaurant/icons/Search-icon.png")), panel_1, null);
+		panel_1.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 12, 757, 243);
+		panel_1.add(scrollPane);
+		
+		table = new JTable();
+		table.setFont(new Font("Dialog", Font.PLAIN, 14));
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+			},
+			new String[] {
+				"ID", "Nome", "CPF", "Endere\u00E7o", "Telefone"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(206, 275, 98, 26);
+		panel_1.add(btnBuscar);
+		
+		tfBusca = new JTextField();
+		tfBusca.setFont(new Font("Dialog", Font.PLAIN, 15));
+		tfBusca.setColumns(10);
+		tfBusca.setBounds(12, 308, 307, 24);
+		panel_1.add(tfBusca);
+		
+		JRadioButton rbNome = new JRadioButton("Nome");
+		buttonGroup.add(rbNome);
+		rbNome.setBackground(Color.WHITE);
+		rbNome.setBounds(12, 276, 77, 24);
+		panel_1.add(rbNome);
+		
+		JRadioButton rbCPF = new JRadioButton("CPF");
+		buttonGroup.add(rbCPF);
+		rbCPF.setBackground(Color.WHITE);
+		rbCPF.setBounds(93, 276, 65, 24);
+		panel_1.add(rbCPF);
+		table.getColumnModel().getColumn(0).setPreferredWidth(60);
+		table.getColumnModel().getColumn(1).setPreferredWidth(215);
+		table.getColumnModel().getColumn(2).setPreferredWidth(178);
+		table.getColumnModel().getColumn(3).setPreferredWidth(359);
+		table.getColumnModel().getColumn(4).setPreferredWidth(153);
 	}
 }
