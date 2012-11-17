@@ -6,6 +6,7 @@ import restaurant.util.Cargo;
 
 public class Funcionario {
 	
+	private int id;
 	private String ctps;
 	private String nome;
 	private String telefone;
@@ -18,6 +19,7 @@ public class Funcionario {
 	private Login login;
 	
 	public Funcionario() {
+		id = 0;
 		ctps = "";
 		nome = "";
 		telefone = "";
@@ -28,6 +30,14 @@ public class Funcionario {
 		comissao = 0.0f;
 		cargo = Cargo.ATENDENTE;
 		login = new Login();		
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getCtps() {

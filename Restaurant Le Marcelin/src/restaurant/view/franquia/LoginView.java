@@ -1,4 +1,4 @@
-package restaurant.view;
+package restaurant.view.franquia;
 
 import java.awt.EventQueue;
 

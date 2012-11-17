@@ -1,4 +1,4 @@
-package restaurant.view;
+package restaurant.view.venda;
 
 import java.awt.EventQueue;
 

@@ -1,4 +1,4 @@
-import restaurant.view.LoginView;
+import restaurant.view.franquia.LoginView;
 
 
 public class Main {
@@ -8,7 +8,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		LoginView login = new restaurant.view.LoginView();
+		LoginView login = new restaurant.view.franquia.LoginView();
 		login.setLocationRelativeTo(null);
 		login.setVisible(true);
 		
