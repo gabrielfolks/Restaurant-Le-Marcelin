@@ -7,17 +7,27 @@ import restaurant.util.Medida;
 public class Produto extends Mercadoria {
 
 	private float tempoPreparo;
+	private float quantMedida;
 	private String medidaComercial;
 	private float taxaDesconto;
 	private boolean fabricacaoPropria;
 	private HashSet<Ingrediente> ingredientes;
 	
 	public Produto() {
+		quantMedida = 0;
 		tempoPreparo = 0;
 		medidaComercial = "";
 		taxaDesconto = 1.0f;
 		fabricacaoPropria = false;
 		ingredientes = new HashSet<Ingrediente>();
+	}
+	
+	public float getQuantMedida() {
+		return quantMedida;
+	}
+	
+	public void setQuantMedida(float quantMedida) {
+		this.quantMedida = quantMedida;
 	}
 	
 	public float getTempoPreparo() {
