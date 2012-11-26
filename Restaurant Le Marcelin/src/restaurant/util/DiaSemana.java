@@ -1,6 +1,6 @@
 package restaurant.util;
 
-public enum Dia {
+public enum DiaSemana {
 	
 	DOM,
 	SEG,
