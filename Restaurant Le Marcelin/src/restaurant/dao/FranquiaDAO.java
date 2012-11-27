@@ -5,6 +5,8 @@ import restaurant.model.franquia.Franquia;
 
 public class FranquiaDAO implements IFranquiaDAO {
 
+	protected FranquiaDAO(){}
+	
 	@Override
 	public void adicionar(Franquia franquia) {
 		// TODO Auto-generated method stub

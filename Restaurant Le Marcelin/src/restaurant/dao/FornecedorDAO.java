@@ -5,6 +5,8 @@ import restaurant.model.estoque.Fornecedor;
 
 public class FornecedorDAO implements IFornecedorDAO {
 
+	protected FornecedorDAO(){}
+	
 	@Override
 	public void adicionar(Fornecedor fornecedor) {
 		// TODO Auto-generated method stub

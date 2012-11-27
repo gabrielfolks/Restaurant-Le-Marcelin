@@ -1,13 +1,17 @@
 package restaurant.control.venda;
 
-import restaurant.dao.CardapioDAO;
+import restaurant.dao.DAOFactory;
 import restaurant.dao.interfaces.ICardapioDAO;
 import restaurant.model.venda.Cardapio;
 import restaurant.util.DiaSemana;
 
 public class CardapioController {
 
-	ICardapioDAO cardapioDAO = new CardapioDAO();
+	ICardapioDAO cardapioDAO;
+	
+	public CardapioController() {
+		cardapioDAO = DAOFactory.createCardapioDAO();
+	}
 	
 	public void adicionarCardapio(Cardapio cardapio) {
 		cardapioDAO.adicionar(cardapio);

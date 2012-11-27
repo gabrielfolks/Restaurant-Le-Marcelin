@@ -2,14 +2,18 @@ package restaurant.control.franquia;
 
 import java.util.Set;
 
-import restaurant.dao.FuncionarioDAO;
+import restaurant.dao.DAOFactory;
 import restaurant.dao.interfaces.IFuncionarioDAO;
 import restaurant.model.franquia.Funcionario;
 import restaurant.util.Cargo;
 
 public class FuncionarioController {
 
-	IFuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+	IFuncionarioDAO funcionarioDAO;
+	
+	public FuncionarioController() {
+		funcionarioDAO = DAOFactory.createFuncionarioDAO();
+	}
 	
 	public void adicionarFuncionario(Funcionario funcionario) {
 		funcionarioDAO.adicionar(funcionario);

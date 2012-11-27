@@ -6,6 +6,8 @@ import restaurant.util.DiaSemana;
 
 public class CardapioDAO implements ICardapioDAO {
 
+	protected CardapioDAO(){}
+	
 	@Override
 	public void adicionar(Cardapio cardapio) {
 		// TODO Auto-generated method stub

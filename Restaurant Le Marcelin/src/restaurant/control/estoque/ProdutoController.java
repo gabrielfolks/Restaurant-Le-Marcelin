@@ -1,28 +1,34 @@
 package restaurant.control.estoque;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Set;
 
+import restaurant.dao.DAOFactory;
+import restaurant.dao.interfaces.IProdutoDAO;
 import restaurant.model.estoque.Produto;
 
 public class ProdutoController {
 	
-	private HashSet<Produto> produtos;
+	private IProdutoDAO produtoDAO;
 	
-	public void adicionarProduto(Produto f){		
-
+	public ProdutoController() {
+		produtoDAO = DAOFactory.createProdutoDAO();
 	}
 	
-	public void removerProduto(Produto f){
-		
+	public void adicionarProduto(Produto produto){		
+		produtoDAO.adicionar(produto);
 	}
 	
-	public void atualizarProduto(Produto f){
-		
+	public void removerProduto(Produto produto){
+		produtoDAO.remover(produto);
 	}
 	
-	public ArrayList<Produto> buscarProduto(String nome){
-		return null;
+	public void atualizarProduto(Produto produto){
+		produtoDAO.atualizar(produto);
+	}
+	
+	public Set<Produto> pesquisarProdutoPorNome(String nome){
+		return produtoDAO.pesquisarPorNome(nome);
 	}
 	
 	public ArrayList<Produto> buscarProduto(int codigo){

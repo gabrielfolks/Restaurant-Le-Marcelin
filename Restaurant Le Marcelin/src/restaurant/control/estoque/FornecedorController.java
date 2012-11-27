@@ -1,32 +1,31 @@
 package restaurant.control.estoque;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
+import restaurant.dao.DAOFactory;
+import restaurant.dao.interfaces.IFornecedorDAO;
 import restaurant.model.estoque.Fornecedor;
 
 public class FornecedorController {
 	
-	private HashSet<Fornecedor> fornecedores;
+	private IFornecedorDAO fornecedorDAO;
 	
 	public FornecedorController(){
-		fornecedores = new HashSet<>();
+		fornecedorDAO = DAOFactory.createFornecedorDAO();
 	}
 	
 	public void adicionarFornecedor(Fornecedor f){		
-		fornecedores.add(f);
+		fornecedorDAO.adicionar(f);
 	}
 	
 	public void removerFornecedor(Fornecedor f){
-		fornecedores.remove(f);
+		fornecedorDAO.remover(f);
 	}
 	
 	public void atualizarFornecedor(Fornecedor f){
-		
+		fornecedorDAO.atualizar(f);
 	}
 	
-	public ArrayList<Fornecedor> buscarFornecedor(String nome){
-		return null;
+	public Fornecedor pesquisarFornecedorPorCNPJ(String cnpj){
+		return fornecedorDAO.pesquisar(cnpj);
 	}
 
 }
