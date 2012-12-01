@@ -1,14 +1,16 @@
 package restaurant.model.venda;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Comanda {
 	
 	private int id;
+	private int codigo;
 	private float valor;
 	private Set<Pedido> pedidos;
-	
+
 	public Comanda() {
 		id = 0;
 		valor = 0.0f;
@@ -23,7 +25,14 @@ public class Comanda {
 		this.id = (id > 0) ? id : this.id;
 	}
 
+	public int getCodigo() {
+		return codigo;
+	}
 
+	public void setCodigo(int codigo) {
+		this.codigo = (codigo > 0) ? id : this.codigo;
+	}
+	
 	public float getValor() {
 		return valor;
 	}
@@ -36,16 +45,25 @@ public class Comanda {
 	 * Percorre a lista de pedidos e calcula seu valor total.
 	 * @return o valor da soma dos pedidos.
 	 */
-	public float calculaValor(){
-		return 0; 
+	public float calcularValor(){
+		
+		float valorComanda = 0;
+		
+		for (Pedido p : pedidos) 
+			valorComanda += p.getValor();
+		
+		return valorComanda; 
 	}
 	
-	public void adicionaPedido(Pedido p){
+	public void adicionarPedido(Pedido p){
 		pedidos.add(p);
 	}
 	
-	public void removePedido(Pedido p){
+	public void removerPedido(Pedido p){
 		pedidos.remove(p);
 	}
  
+	public Set<Pedido> getPedidos() {
+		return Collections.unmodifiableSet(pedidos);
+	}
 }

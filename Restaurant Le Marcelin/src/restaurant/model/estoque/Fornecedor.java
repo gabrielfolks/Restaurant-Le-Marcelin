@@ -79,7 +79,7 @@ public class Fornecedor {
 		mercadorias.remove(m);
 	}
 	
-	public HashSet<Mercadoria> listaMercadorias(){
+	public Set<Mercadoria> listaMercadorias(){
 		return mercadorias;
 	}
 	
