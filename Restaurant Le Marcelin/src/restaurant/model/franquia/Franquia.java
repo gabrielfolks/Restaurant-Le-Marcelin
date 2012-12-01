@@ -9,7 +9,7 @@ public class Franquia {
 	private String CEP;
 	private String cidade;
 	private char estado;
-	private HashSet<Funcionario> funcionarios;
+	private Set<Funcionario> funcionarios;
 	
 	public Franquia() {
 		nome = "";

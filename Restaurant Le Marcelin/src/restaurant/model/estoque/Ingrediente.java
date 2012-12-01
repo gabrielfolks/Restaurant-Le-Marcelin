@@ -19,7 +19,7 @@ public class Ingrediente {
 	}
 
 	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
+		this.quantidade = (quantidade > 0) ? quantidade : this.quantidade;
 	}
 
 	public Medida getMedida() {

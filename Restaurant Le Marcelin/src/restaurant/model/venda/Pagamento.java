@@ -7,12 +7,12 @@ import restaurant.util.Forma;
 public class Pagamento {
 	
 	private Forma formaPagamento;
-	private int quantidadeParecelas;
+	private int quantidadeParcelas;
 	private HashSet<Comanda> comandas;
 	
 	public Pagamento() {
 		formaPagamento = Forma.DINHEIRO;
-		quantidadeParecelas = 0;
+		quantidadeParcelas = 0;
 		comandas = new HashSet<>();
 	}
 
@@ -24,12 +24,12 @@ public class Pagamento {
 		this.formaPagamento = formaPagamento;
 	}
 
-	public int getQuantidadeParecelas() {
-		return quantidadeParecelas;
+	public int getQuantidadeParcelas() {
+		return quantidadeParcelas;
 	}
 	
-	public void setQuantidadeParecelas(int quantidadeParecelas) {
-		this.quantidadeParecelas = quantidadeParecelas;
+	public void setQuantidadeParcelas(int quantidadeParcelas) {
+		this.quantidadeParcelas = (quantidadeParcelas > 0) ? quantidadeParcelas : this.quantidadeParcelas;
 	}
 	
 	public void adicionaComanda(Comanda c){

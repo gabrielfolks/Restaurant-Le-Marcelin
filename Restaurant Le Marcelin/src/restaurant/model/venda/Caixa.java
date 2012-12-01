@@ -1,38 +1,38 @@
 package restaurant.model.venda;
 
 import java.util.Date;
-import java.util.HashSet;
+import java.util.Set;
 
 
 public class Caixa {
 	
-	private int codigo;
+	private int id;
 	private Date dia;
 	private float valor;
 	private float valorInicial;
-	private HashSet<Pagamento> pagamentos;
+	private Set<Pagamento> pagamentos;
 	
-	public Caixa(float valorInicial) {		
-		this.valorInicial = valorInicial;
-		codigo = 0;
+	public Caixa(float valorInicial) {
+		setValorInicial(valorInicial);
+		id = 0;
 		dia = new Date();
 		valor = 0;
 	}
 	
 	public void suprimento(float valor){
-		this.valor += valor;
+		this.valor += (valor > 0) ? valor : 0;
 	}
 	
 	public void sangria(float valor){
-		this.valor -= valor;
+		this.valor -= (valor > 0) ? valor : 0;
 	}
 
-	public int getCodigo() {
-		return codigo;
+	public int getId() {
+		return id;
 	}
 
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public void setId(int id) {
+		this.id = (id > 0) ? id : this.id;
 	}
 
 	public Date getDia() {
@@ -48,7 +48,7 @@ public class Caixa {
 	}
 
 	public void setValor(float valor) {
-		this.valor = valor;
+		this.valor = (valor > 0) ? valor : this.valor;
 	}
 
 	public float getValorInicial() {
@@ -56,7 +56,7 @@ public class Caixa {
 	}
 
 	public void setValorInicial(float valorInicial) {
-		this.valorInicial = valorInicial;
+		this.valorInicial = (valorInicial > 0) ? valorInicial : this.valorInicial;
 	}
 	
 	public void adicionaPagamento(Pagamento pagamento){

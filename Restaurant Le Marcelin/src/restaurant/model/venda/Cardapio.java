@@ -1,5 +1,6 @@
 package restaurant.model.venda;
 import java.util.HashSet;
+import java.util.Set;
 
 import restaurant.model.estoque.Produto;
 import restaurant.util.Dia;
@@ -7,7 +8,7 @@ import restaurant.util.Dia;
 public class Cardapio {
 	
 	private Dia dia;
-	private HashSet<Produto> produtos;
+	private Set<Produto> produtos;
 	
 	public Cardapio() {
 		dia = Dia.DOM;
@@ -30,7 +31,7 @@ public class Cardapio {
 		produtos.remove(p);
 	}
 	
-	public HashSet<Produto> listaProdutos(){
+	public Set<Produto> listaProdutos(){
 		return produtos;
 	}
 

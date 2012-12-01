@@ -83,7 +83,7 @@ public class Funcionario {
 	}
 
 	public void setSalario(float salario) {
-		this.salario = salario;
+		this.salario = (salario > 0) ? salario : this.salario;
 	}
 
 	public float getComissao() {
@@ -91,7 +91,7 @@ public class Funcionario {
 	}
 
 	public void setComissao(float comissao) {
-		this.comissao = comissao;
+		this.comissao = (comissao > 0) ? comissao : this.comissao;
 	}
 
 	public Cargo getCargo() {
