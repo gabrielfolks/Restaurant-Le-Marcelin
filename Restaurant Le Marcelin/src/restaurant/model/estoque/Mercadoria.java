@@ -35,7 +35,7 @@ public abstract class Mercadoria {
 	}
 
 	public void setValor(float valor) {
-		this.valor = valor;
+		this.valor = (valor > 0) ? valor : this.valor;
 	}
 
 	public Estoque getEstoque() {

@@ -17,7 +17,7 @@ public class Estoque {
 	}
 
 	public void setQtdeMax(int qtdeMax) {
-		this.qtdeMax = qtdeMax;
+		this.qtdeMax = (qtdeMax > 0 || qtdeMax >= qtdeMin) ? qtdeMax : this.qtdeMax;
 	}
 
 	public int getQtdeMin() {
@@ -25,7 +25,7 @@ public class Estoque {
 	}
 
 	public void setQtdeMin(int qtdeMin) {
-		this.qtdeMin = qtdeMin;
+		this.qtdeMin = (qtdeMin > 0 || qtdeMin <= qtdeMax) ? qtdeMin : this.qtdeMin;
 	}
 
 	public int getQtdeItens() {
@@ -33,7 +33,8 @@ public class Estoque {
 	}
 
 	public void setQtdeItens(int qtdeItens) {
-		this.qtdeItens = qtdeItens;
+		this.qtdeItens = 
+				(qtdeItens > 0 || qtdeItens > qtdeMin || qtdeItens < qtdeMax) ? qtdeMin : this.qtdeMin;
 	}
 	
 	

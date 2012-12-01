@@ -1,33 +1,35 @@
 package restaurant.model.venda;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class Comanda {
 	
-	private int codigo;
+	private int id;
 	private float valor;
-	private HashSet<Pedido> pedidos;
+	private Set<Pedido> pedidos;
 	
 	public Comanda() {
-		codigo = 0;
+		id = 0;
 		valor = 0.0f;
 		pedidos = new HashSet<>();
 	}
 
-	public int getCodigo() {
-		return codigo;
+	public int getId() {
+		return id;
 	}
 
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public void setId(int id) {
+		this.id = (id > 0) ? id : this.id;
 	}
+
 
 	public float getValor() {
 		return valor;
 	}
 
 	public void setValor(float valor) {
-		this.valor = valor;
+		this.valor = (valor > 0) ? valor : this.valor;
 	}
 	
 	/**

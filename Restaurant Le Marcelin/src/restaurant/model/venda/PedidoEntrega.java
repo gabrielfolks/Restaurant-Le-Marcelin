@@ -27,7 +27,7 @@ public class PedidoEntrega extends Pedido {
 	}
 
 	public void setTaxaEntrega(float taxaEntrega) {
-		this.taxaEntrega = taxaEntrega;
+		this.taxaEntrega = (taxaEntrega > 0) ? taxaEntrega : this.taxaEntrega;
 	}
 
 	public Cliente getCliente() {
