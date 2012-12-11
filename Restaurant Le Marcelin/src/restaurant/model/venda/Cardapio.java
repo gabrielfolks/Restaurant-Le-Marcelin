@@ -1,36 +1,37 @@
 package restaurant.model.venda;
 import java.util.HashSet;
+import java.util.Set;
 
 import restaurant.model.estoque.Produto;
-import restaurant.util.Dia;
+import restaurant.util.DiaDaSemana;
 
 public class Cardapio {
 	
-	private Dia dia;
-	private HashSet<Produto> produtos;
+	private DiaDaSemana dia;
+	private Set<Produto> produtos;
 	
 	public Cardapio() {
-		dia = Dia.DOM;
+		dia = DiaDaSemana.DOM;
 		produtos = new HashSet<>();
 	}
 
-	public Dia getDia() {
+	public DiaDaSemana getDia() {
 		return dia;
 	}
 
-	public void setDia(Dia dia) {
+	public void setDia(DiaDaSemana dia) {
 		this.dia = dia;
 	}
 	
-	public void adicionaProduto(Produto p){
+	public void adicionarProduto(Produto p){
 		produtos.add(p);
 	}
 	
-	public void removeProduto(Produto p){
+	public void removerProduto(Produto p){
 		produtos.remove(p);
 	}
 	
-	public HashSet<Produto> listaProdutos(){
+	public Set<Produto> listaProdutos(){
 		return produtos;
 	}
 

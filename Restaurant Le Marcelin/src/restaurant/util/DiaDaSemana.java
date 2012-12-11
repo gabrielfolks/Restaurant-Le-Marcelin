@@ -1,6 +1,6 @@
 package restaurant.util;
 
-public enum Dia {
+public enum DiaDaSemana {
 	
 	DOM,
 	SEG,
@@ -8,9 +8,7 @@ public enum Dia {
 	QUA,
 	QUI,
 	SEX,
-	SAB
-			
-			
+	SAB	
 			
 
 }

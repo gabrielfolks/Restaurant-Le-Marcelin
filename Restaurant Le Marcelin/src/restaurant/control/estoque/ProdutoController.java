@@ -1,14 +1,11 @@
 package restaurant.control.estoque;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Set;
 
 import restaurant.model.estoque.Produto;
 
 public class ProdutoController {
-	
-	private HashSet<Produto> produtos;
-	
+		
 	public void adicionarProduto(Produto f){		
 
 	}
@@ -21,11 +18,11 @@ public class ProdutoController {
 		
 	}
 	
-	public ArrayList<Produto> buscarProduto(String nome){
+	public Set<Produto> buscarProduto(String nome){
 		return null;
 	}
 	
-	public ArrayList<Produto> buscarProduto(int codigo){
+	public Set<Produto> buscarProduto(int codigo){
 		return null;
 	}
 

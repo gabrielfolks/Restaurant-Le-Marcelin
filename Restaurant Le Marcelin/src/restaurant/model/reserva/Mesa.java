@@ -4,25 +4,32 @@ public class Mesa {
 	
 	
 	private int numero;
+	private int id;
 	private String zona;
 	private boolean fumante;
 	private int lugares;
 	
 	public Mesa() {
-		numero = 0;
 		zona = "";
 		fumante = false;
-		lugares = 0;		
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = (id > 0) ? id : this.id;
 	}
 
 	public int getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setMesa(int numero) {
+		this.numero = (numero > 0) ? numero : this.numero;
 	}
-
+	
 	public String getZona() {
 		return zona;
 	}
@@ -44,7 +51,7 @@ public class Mesa {
 	}
 
 	public void setLugares(int lugares) {
-		this.lugares = lugares;
+		this.lugares = (lugares > 0) ? id : this.id;
 	}
 	
 	

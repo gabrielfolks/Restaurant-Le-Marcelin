@@ -1,6 +1,6 @@
 package restaurant.model.franquia;
 
-import java.util.HashSet;
+import java.util.Set;
 
 public class Franquia {
 	
@@ -11,7 +11,7 @@ public class Franquia {
 	private String cidade;
 	private char estado;
 	private String cnpj;
-	private HashSet<Funcionario> funcionarios;
+	private Set<Funcionario> funcionarios;
 	
 	public Franquia() {
 		razao = "";

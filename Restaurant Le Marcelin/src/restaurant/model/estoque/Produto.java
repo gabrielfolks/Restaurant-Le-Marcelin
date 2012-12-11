@@ -1,6 +1,7 @@
 package restaurant.model.estoque;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import restaurant.util.Medida;
 
@@ -11,7 +12,7 @@ public class Produto extends Mercadoria {
 	private String medidaComercial;
 	private float taxaDesconto;
 	private boolean fabricacaoPropria;
-	private HashSet<Ingrediente> ingredientes;
+	private Set<Ingrediente> ingredientes;
 	
 	public Produto() {
 		quantMedida = 0;
@@ -35,7 +36,7 @@ public class Produto extends Mercadoria {
 	}
 	
 	public void setTempoPreparo(float tempoPreparo) {
-		this.tempoPreparo = tempoPreparo;
+		this.tempoPreparo = (tempoPreparo > 0) ? tempoPreparo : this.tempoPreparo;
 	}
 	
 	public String getMedidaComercial() {
@@ -51,7 +52,7 @@ public class Produto extends Mercadoria {
 	}
 	
 	public void setTaxaDesconto(float taxaDesconto) {
-		this.taxaDesconto = taxaDesconto;
+		this.taxaDesconto = (taxaDesconto > 0) ? taxaDesconto : this.taxaDesconto;
 	}
 	
 	public boolean isFabricacaoPropria() {

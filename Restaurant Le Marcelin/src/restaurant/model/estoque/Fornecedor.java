@@ -1,6 +1,7 @@
 package restaurant.model.estoque;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class Fornecedor {
 	
@@ -10,7 +11,7 @@ public class Fornecedor {
 	private String endereco;
 	private String razaoSocial;
 	private String cep;
-	private HashSet<Mercadoria> mercadorias;
+	private Set<Mercadoria> mercadorias;
 	
 	public Fornecedor() {
 		nome = "";
@@ -78,7 +79,7 @@ public class Fornecedor {
 		mercadorias.remove(m);
 	}
 	
-	public HashSet<Mercadoria> listaMercadorias(){
+	public Set<Mercadoria> listaMercadorias(){
 		return mercadorias;
 	}
 	
