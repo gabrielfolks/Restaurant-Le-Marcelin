@@ -1,4 +1,4 @@
-import restaurant.boundary.LoginView;
+import restaurant.view.franquia.LoginView;
 
 
 public class Main {
