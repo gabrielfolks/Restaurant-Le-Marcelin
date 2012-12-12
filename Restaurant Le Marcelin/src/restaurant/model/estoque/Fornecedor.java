@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 public class Fornecedor {
 	
+	private int id;
 	private String nome;
 	private String cnpj;
 	private String telefone;
@@ -81,8 +82,14 @@ public class Fornecedor {
 	public HashSet<Mercadoria> listaMercadorias(){
 		return mercadorias;
 	}
+
+	public int getId() {
+		return id;
+	}
 	
-	
+	public void setId(int id) {
+		this.id = id;
+	}
 }	
 	
 
