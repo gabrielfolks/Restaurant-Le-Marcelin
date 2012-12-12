@@ -1,7 +1,5 @@
 package restaurant.control.franquia;
-
 import restaurant.dao.DAOFactory;
-import restaurant.dao.FranquiaDAO;
 import restaurant.dao.interfaces.IFranquiaDAO;
 import restaurant.model.franquia.Franquia;
 
