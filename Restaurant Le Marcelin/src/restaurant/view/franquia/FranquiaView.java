@@ -1,17 +1,18 @@
 package restaurant.view.franquia;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.EventQueue;
 import java.awt.Font;
-import java.text.ParseException;
 
-import javax.swing.JTextField;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.text.MaskFormatter;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import restaurant.util.MascarasCampos;
 
 public class FranquiaView {
 
@@ -20,7 +21,6 @@ public class FranquiaView {
 	private JTextField tfFantasia;
 	private JTextField tfEndereco;
 	private JTextField tfCidade;
-	private JTextField tfEstado;
 	private JFormattedTextField tfCEP;
 	private JLabel lblCnpj;
 	private JTextField tfCNPJ;
@@ -101,12 +101,6 @@ public class FranquiaView {
 		lblCidade.setBounds(12, 137, 98, 16);
 		frmRestaurantLeMarcelin.getContentPane().add(lblCidade);
 		
-		tfEstado = new JTextField();
-		tfEstado.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		tfEstado.setColumns(10);
-		tfEstado.setBounds(106, 168, 60, 22);
-		frmRestaurantLeMarcelin.getContentPane().add(tfEstado);
-		
 		JLabel lblEstado = new JLabel("Estado");
 		lblEstado.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		lblEstado.setBounds(12, 171, 98, 16);
@@ -117,12 +111,8 @@ public class FranquiaView {
 		lblCep.setBounds(12, 206, 98, 16);
 		frmRestaurantLeMarcelin.getContentPane().add(lblCep);
 		
-		try {
-			tfCEP = new JFormattedTextField(new MaskFormatter("#####-###"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		tfCEP = new JFormattedTextField(MascarasCampos.getCEPMask());
 		tfCEP.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		tfCEP.setColumns(10);
 		tfCEP.setBounds(106, 203, 109, 22);
@@ -137,17 +127,19 @@ public class FranquiaView {
 		lblCnpj.setBounds(12, 74, 98, 16);
 		frmRestaurantLeMarcelin.getContentPane().add(lblCnpj);
 		
-		try {
-			tfCNPJ = new JFormattedTextField(new MaskFormatter("##.###.###/####-##"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		tfCNPJ = new JFormattedTextField(MascarasCampos.getCNPJMask());
+		
 		tfCNPJ.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		tfCNPJ.setColumns(10);
 		tfCNPJ.setBounds(106, 71, 403, 22);
 		
 		frmRestaurantLeMarcelin.getContentPane().add(tfCNPJ);
+		
+		JComboBox cboEstado = new JComboBox();
+		cboEstado.setModel(new DefaultComboBoxModel(new String[] {"AC", "AL", "AP", "AM ", "BA", "CE", "DF", "ES", "GO ", "MA", "MT", "MS", "MG", "PA ", "PB", "PR", "PE", "PI", "RJ", "RN ", "RS", "RO", "RR", "SC", "SP", "SE", "TO"}));
+		cboEstado.setBounds(106, 172, 51, 20);
+		frmRestaurantLeMarcelin.getContentPane().add(cboEstado);
 		frmRestaurantLeMarcelin.setBounds(100, 100, 581, 295);
 		frmRestaurantLeMarcelin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
