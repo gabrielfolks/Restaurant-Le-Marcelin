@@ -3,17 +3,15 @@ package restaurant.dao.jdbc;
 import java.sql.*;
 
 public class Conexao {
-	public static String status = "";
-	public static Connection conn = null;
-	
-	// ALGUMA COISA PARA DAR COMMIT
+	private static String status = "";
+	private static Connection conn = null;
 	
 	public static Connection getConexao() {
 		try {
-			
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			String url = "jdbc:mysql://localhost:3306/restaurantlemarcelin";
-			conn = DriverManager.getConnection(url, "root", "");
+			String usuario = "root";
+			String senha = "";
+			conn = DriverManager.getConnection(url, usuario, senha);
 		}		
 		
 		catch(SQLException e){
@@ -26,7 +24,6 @@ public class Conexao {
 	}
 
 	public static void fechar(){
-		
 		try {
 			conn.close();
 		} catch (Exception e) {
