@@ -1,6 +1,8 @@
 package restaurant.dao.jdbc;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Conexao {
 	private static String status = "";
@@ -10,7 +12,7 @@ public class Conexao {
 		try {
 			String url = "jdbc:mysql://localhost:3306/restaurantlemarcelin";
 			String usuario = "root";
-			String senha = "";
+			String senha = "root";
 			conn = DriverManager.getConnection(url, usuario, senha);
 		}		
 		
@@ -21,15 +23,6 @@ public class Conexao {
 			status = e.getMessage();
 		}
 		return conn;
-	}
-
-	public static void fechar(){
-		try {
-			conn.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
 	}
 
 }
