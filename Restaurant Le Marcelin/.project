@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/restaurant/dao/jdbc/Conexao.java</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Dropbox/Projeto%20Veterin%C3%A1ria%20-%20Scrum/Codifica%C3%A7%C3%A3o/src/edu/fatec/veterinaria/utilitarios/Conexao.java</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
