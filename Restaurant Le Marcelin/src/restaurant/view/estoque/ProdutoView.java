@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.GridLayout;
+
+import javax.swing.JFormattedTextField;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -12,6 +14,8 @@ import java.awt.Font;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
+import restaurant.util.MascarasCampos;
 import restaurant.util.Medida;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -98,11 +102,11 @@ public class ProdutoView {
 		panel_1.add(tfNome);
 		tfNome.setColumns(10);
 		
-		JLabel lblValorR = new JLabel("Valor R$");
+		JLabel lblValorR = new JLabel("Valor");
 		lblValorR.setBounds(12, 68, 55, 16);
 		panel_1.add(lblValorR);
 		
-		tfValor = new JTextField();
+		tfValor = new JFormattedTextField(MascarasCampos.getDinheiroMask());
 		tfValor.setBounds(72, 66, 114, 20);
 		panel_1.add(tfValor);
 		tfValor.setColumns(10);
@@ -175,11 +179,11 @@ public class ProdutoView {
 		cbMedida.setBounds(197, 38, 92, 25);
 		panel_3.add(cbMedida);
 		
-		JLabel lblDescR = new JLabel("Desc. R$");
+		JLabel lblDescR = new JLabel("Desconto");
 		lblDescR.setBounds(8, 72, 55, 16);
 		panel_3.add(lblDescR);
 		
-		tfTaxaDesconto = new JTextField();
+		tfTaxaDesconto = new JFormattedTextField(MascarasCampos.getDinheiroMask());
 		tfTaxaDesconto.setColumns(10);
 		tfTaxaDesconto.setBounds(71, 72, 114, 20);
 		panel_3.add(tfTaxaDesconto);

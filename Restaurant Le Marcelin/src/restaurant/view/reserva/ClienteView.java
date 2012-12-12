@@ -37,13 +37,14 @@ public class ClienteView implements ActionListener {
 	private JTextField tfNome;
 	private JFormattedTextField tfTelefone;
 	private JTable table;
-	private JTextField tfBusca;
+	private JFormattedTextField tfBusca;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JButton btnSalvar;
 	private JButton btnExcluir;
 	private JButton btnLimpar;
 	private JButton btnBuscar;
-
+	private JRadioButton rbCPF;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -105,9 +106,11 @@ public class ClienteView implements ActionListener {
 		panel.add(lblCpf);
 		
 		try {
-			tfCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+			MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
+			cpfMask.setValidCharacters("0123456789");
+			cpfMask.setValueContainsLiteralCharacters(false);
+			tfCpf = new JFormattedTextField(cpfMask);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		tfCpf.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -143,9 +146,11 @@ public class ClienteView implements ActionListener {
 		panel.add(lblTelefone);
 		
 		try {
-			tfTelefone = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
+			MaskFormatter telefoneMask = new MaskFormatter("(##) #####-####");
+			telefoneMask.setValidCharacters("0123456789");
+			telefoneMask.setValueContainsLiteralCharacters(false);
+			tfTelefone = new JFormattedTextField(telefoneMask);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		tfTelefone.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -205,7 +210,8 @@ public class ClienteView implements ActionListener {
 		btnBuscar.setBounds(206, 275, 98, 26);
 		panel_1.add(btnBuscar);
 		
-		tfBusca = new JTextField();
+		tfBusca = new JFormattedTextField();
+	
 		tfBusca.setFont(new Font("Dialog", Font.PLAIN, 15));
 		tfBusca.setColumns(10);
 		tfBusca.setBounds(12, 308, 307, 24);
@@ -217,7 +223,7 @@ public class ClienteView implements ActionListener {
 		rbNome.setBounds(12, 276, 77, 24);
 		panel_1.add(rbNome);
 		
-		JRadioButton rbCPF = new JRadioButton("CPF");
+		rbCPF = new JRadioButton("CPF");
 		buttonGroup.add(rbCPF);
 		rbCPF.setBackground(Color.WHITE);
 		rbCPF.setBounds(93, 276, 65, 24);
@@ -234,11 +240,11 @@ public class ClienteView implements ActionListener {
 		Cliente cliente = new Cliente();
 		
 		if (arg0.getSource() == btnSalvar) {
-			
+		
 		}
 		
 		if (arg0.getSource() == btnBuscar) {
-			
+
 		}
 		
 		if (arg0.getSource() == btnExcluir) {
@@ -249,4 +255,5 @@ public class ClienteView implements ActionListener {
 			
 		}
 	}
+	
 }

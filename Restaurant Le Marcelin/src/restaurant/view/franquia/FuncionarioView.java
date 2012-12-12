@@ -11,6 +11,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import restaurant.util.Cargo;
+import restaurant.util.DateTextField;
+
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 
@@ -108,9 +110,11 @@ public class FuncionarioView {
 		panel.add(lblCpf);
 		lblCpf.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		try {
-			tfCPF = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+			MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
+			cpfMask.setValidCharacters("0123456789");
+			cpfMask.setValueContainsLiteralCharacters(false);
+			tfCPF = new JFormattedTextField(cpfMask);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		tfCPF.setBounds(99, 82, 194, 29);
@@ -123,7 +127,7 @@ public class FuncionarioView {
 		panel.add(lblCargo);
 		lblCargo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
-		cbCargo = new JComboBox();
+		cbCargo = new JComboBox<Cargo>();
 		cbCargo.setBounds(363, 117, 194, 29);
 		panel.add(cbCargo);
 		cbCargo.setModel(new DefaultComboBoxModel(Cargo.values()));
@@ -161,12 +165,10 @@ public class FuncionarioView {
 		panel.add(tfNome);
 		tfNome.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		tfNome.setColumns(10);
-		
-		JSpinner spinNascimento = new JSpinner();
-		spinNascimento.setBounds(402, 83, 131, 29);
-		panel.add(spinNascimento);
-		spinNascimento.setModel(new SpinnerDateModel(new Date(1352944800000L), new Date(-2208977612000L), null, Calendar.DAY_OF_YEAR));
-		spinNascimento.setFont(new Font("Dialog", Font.BOLD, 15));
+
+		JTextField tfDate = new DateTextField();
+		tfDate.setBounds(402, 83, 131, 29);
+		panel.add(tfDate);
 		
 		JLabel lblSalrio = new JLabel("Sal\u00E1rio");
 		lblSalrio.setBounds(12, 158, 97, 21);
@@ -182,9 +184,11 @@ public class FuncionarioView {
 		panel.add(lblTelefone);
 		lblTelefone.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		try {
-			tfTelefone = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
+			MaskFormatter telefoneMask = new MaskFormatter("(##) #####-####");
+			telefoneMask.setValidCharacters("0123456789");
+			telefoneMask.setValueContainsLiteralCharacters(false);
+			tfTelefone = new JFormattedTextField(telefoneMask);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		tfTelefone.setBounds(99, 234, 194, 29);
