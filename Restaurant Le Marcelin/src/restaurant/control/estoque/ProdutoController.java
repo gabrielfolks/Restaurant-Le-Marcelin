@@ -1,7 +1,5 @@
 package restaurant.control.estoque;
 
-import java.util.Set;
-
 import restaurant.dao.DAOFactory;
 import restaurant.dao.interfaces.IProdutoDAO;
 import restaurant.model.estoque.Produto;
@@ -26,7 +24,7 @@ public class ProdutoController {
 		produtoDAO.atualizar(produto);
 	}
 	
-	public Set<Produto> pesquisarProduto(int codigo){
+	public Produto pesquisarProduto(int codigo){
 		return produtoDAO.pesquisar(codigo);
 	}
 
