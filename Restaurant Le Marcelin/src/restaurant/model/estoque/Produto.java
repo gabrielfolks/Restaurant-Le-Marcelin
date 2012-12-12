@@ -1,12 +1,13 @@
 package restaurant.model.estoque;
 
+import java.util.Date;
 import java.util.HashSet;
 
 import restaurant.util.Medida;
 
 public class Produto extends Mercadoria {
 
-	private float tempoPreparo;
+	private Date tempoPreparo;
 	private float quantMedida;
 	private String medidaComercial;
 	private float taxaDesconto;
@@ -15,7 +16,6 @@ public class Produto extends Mercadoria {
 	
 	public Produto() {
 		quantMedida = 0;
-		tempoPreparo = 0;
 		medidaComercial = "";
 		taxaDesconto = 1.0f;
 		fabricacaoPropria = false;
@@ -30,11 +30,11 @@ public class Produto extends Mercadoria {
 		this.quantMedida = quantMedida;
 	}
 	
-	public float getTempoPreparo() {
+	public Date getTempoPreparo() {
 		return tempoPreparo;
 	}
 	
-	public void setTempoPreparo(float tempoPreparo) {
+	public void setTempoPreparo(Date tempoPreparo) {
 		this.tempoPreparo = tempoPreparo;
 	}
 	

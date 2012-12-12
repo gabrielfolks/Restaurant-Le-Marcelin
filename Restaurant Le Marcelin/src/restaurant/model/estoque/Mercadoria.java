@@ -2,16 +2,27 @@ package restaurant.model.estoque;
 
 public abstract class Mercadoria {
 	
+	
+	private int id;
 	private int codigo;
 	private String nome;
 	private float valor;
 	private Estoque estoque;
+	private Fornecedor fornecedor;
 	
 	public Mercadoria() {
 		codigo = 0;
 		nome = "";
 		valor = 0.0f;
 		estoque = new Estoque();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getCodigo() {
@@ -43,6 +54,14 @@ public abstract class Mercadoria {
 	}
 
 	abstract void definirEstoque(Estoque estoque);
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
 	
 	
 	
