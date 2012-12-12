@@ -125,7 +125,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			
 			resultSet.first();
 			
-			criarObjetoFuncionario();
+			criarFuncionario();
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -159,7 +159,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			resultSet = prepStmt.executeQuery();
 			
 			while(resultSet.next()) {
-				funcionarios.add(criarObjetoFuncionario());
+				funcionarios.add(criarFuncionario());
 			}
 			
 		} catch (SQLException e) {
@@ -173,7 +173,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 	}
 	
 
-	private Funcionario criarObjetoFuncionario() {
+	private Funcionario criarFuncionario() {
 		
 		Funcionario funcionario = new Funcionario();
 		
