@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+
+import javax.swing.JFormattedTextField;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -14,6 +16,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import restaurant.util.MascarasCampos;
 
 public class FornecedorView extends JFrame {
 
@@ -92,7 +96,7 @@ public class FornecedorView extends JFrame {
 		lblCep.setBounds(11, 103, 60, 14);
 		panel.add(lblCep);
 		
-		tfCEP = new JTextField();
+		tfCEP = new JFormattedTextField(MascarasCampos.getCEPMask());
 		tfCEP.setBounds(119, 100, 70, 20);
 		panel.add(tfCEP);
 		tfCEP.setColumns(8);
@@ -101,7 +105,7 @@ public class FornecedorView extends JFrame {
 		lblTelefone.setBounds(11, 165, 60, 14);
 		panel.add(lblTelefone);
 		
-		tfTelefone = new JTextField();
+		tfTelefone = new JFormattedTextField(MascarasCampos.getTelefoneMask());
 		tfTelefone.setBounds(117, 162, 94, 20);
 		tfTelefone.setColumns(11);
 		panel.add(tfTelefone);
@@ -110,7 +114,7 @@ public class FornecedorView extends JFrame {
 		lblCnpj.setBounds(11, 134, 44, 14);
 		panel.add(lblCnpj);
 		
-		tfCNPJ = new JTextField();
+		tfCNPJ = new JFormattedTextField(MascarasCampos.getCNPJMask());
 		tfCNPJ.setBounds(119, 131, 118, 20);
 		tfCNPJ.setColumns(14);
 		panel.add(tfCNPJ);
