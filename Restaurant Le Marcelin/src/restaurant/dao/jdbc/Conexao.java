@@ -6,6 +6,8 @@ public class Conexao {
 	public static String status = "";
 	public static Connection conn = null;
 	
+	// ALGUMA COISA PARA DAR COMMIT
+	
 	public static Connection getConexao() {
 		try {
 			
