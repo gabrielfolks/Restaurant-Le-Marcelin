@@ -4,14 +4,14 @@ import java.util.HashSet;
 
 public class Franquia {
 	
+	private int id; 
 	private String razao;
 	private String fantasia;
 	private String endereco;
 	private String cep;
 	private String cidade;
-	private char estado;
+	private String estado;
 	private String cnpj;
-	private HashSet<Funcionario> funcionarios;
 	
 	public Franquia() {
 		razao = "";
@@ -19,8 +19,16 @@ public class Franquia {
 		endereco = "";
 		cep = "";
 		cidade = "";
-		estado = ' ';
+		estado = "";
 		cnpj = "";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getRazao() {
@@ -63,20 +71,12 @@ public class Franquia {
 		this.cidade = cidade;
 	}
 
-	public char getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(char estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
-	}
-	
-	public void adicionaFuncionario(Funcionario f){
-		funcionarios.add(f);
-	}
-	
-	public void removeFuncionario(Funcionario f){
-		funcionarios.add(f);
 	}
 	
 	public String getCnpj() {
