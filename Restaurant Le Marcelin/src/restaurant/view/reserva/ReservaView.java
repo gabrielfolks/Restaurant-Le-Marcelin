@@ -223,14 +223,14 @@ public class ReservaView {
 		
 		JComboBox cbFumante = new JComboBox();
 		cbFumante.setBackground(Color.WHITE);
-		cbFumante.setModel(new DefaultComboBoxModel(new String[] {"Sim", "N\u00E3o"}));
+		cbFumante.setModel(new DefaultComboBoxModel(new String[] {"N\u00E3o", "Sim"}));
 		cbFumante.setFont(new Font("Dialog", Font.BOLD, 15));
-		cbFumante.setBounds(96, 83, 89, 25);
+		cbFumante.setBounds(96, 83, 68, 25);
 		panel_1.add(cbFumante);
 		
-		JButton btnBuscar = new JButton("Buscar");
+		JButton btnBuscar = new JButton("Buscar mesa");
 		btnBuscar.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		btnBuscar.setBounds(269, 22, 98, 26);
+		btnBuscar.setBounds(269, 22, 121, 26);
 		panel_1.add(btnBuscar);
 		
 		JButton btnSalvar = new JButton("Salvar");
