@@ -10,7 +10,7 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import restaurant.util.Dia;
+import restaurant.util.DiaSemana;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -63,7 +63,7 @@ public class CardapioView extends JFrame {
 		
 		JComboBox cbDiaSemana = new JComboBox();
 		panel_1.add(cbDiaSemana);
-		cbDiaSemana.setModel(new DefaultComboBoxModel(Dia.values()));
+		cbDiaSemana.setModel(new DefaultComboBoxModel(DiaSemana.values()));
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);

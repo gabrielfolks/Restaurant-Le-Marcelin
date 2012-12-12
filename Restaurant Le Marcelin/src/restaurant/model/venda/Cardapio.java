@@ -2,23 +2,23 @@ package restaurant.model.venda;
 import java.util.HashSet;
 
 import restaurant.model.estoque.Produto;
-import restaurant.util.Dia;
+import restaurant.util.DiaSemana;
 
 public class Cardapio {
 	
-	private Dia dia;
+	private DiaSemana dia;
 	private HashSet<Produto> produtos;
 	
 	public Cardapio() {
-		dia = Dia.DOM;
+		dia = DiaSemana.DOM;
 		produtos = new HashSet<>();
 	}
 
-	public Dia getDia() {
+	public DiaSemana getDia() {
 		return dia;
 	}
 
-	public void setDia(Dia dia) {
+	public void setDia(DiaSemana dia) {
 		this.dia = dia;
 	}
 	
