@@ -1,30 +1,35 @@
 package restaurant.view.reserva;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.ImageIcon;
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 
-import javax.swing.JFormattedTextField;
-import javax.swing.text.MaskFormatter;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
-public class ClienteView {
+import restaurant.control.reserva.ClienteController;
+import restaurant.model.reserva.Cliente;
 
+public class ClienteView implements ActionListener {
+
+	
+	private ClienteController clienteController;
 	private JFrame frmCliente;
 	private JTextField tfCliente;
 	private JFormattedTextField tfCpf;
@@ -34,6 +39,10 @@ public class ClienteView {
 	private JTable table;
 	private JTextField tfBusca;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JButton btnSalvar;
+	private JButton btnExcluir;
+	private JButton btnLimpar;
+	private JButton btnBuscar;
 
 	/**
 	 * Launch the application.
@@ -67,6 +76,8 @@ public class ClienteView {
 		frmCliente.setBounds(100, 100, 800, 600);
 		frmCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCliente.getContentPane().setLayout(null);
+		
+		clienteController = new ClienteController();
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 11, 784, 540);
@@ -147,13 +158,14 @@ public class ClienteView {
 		panel_2.setBounds(12, 196, 676, 43);
 		panel.add(panel_2);
 		
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(this);
 		panel_2.add(btnSalvar);
 		
-		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir = new JButton("Excluir");
 		panel_2.add(btnExcluir);
 		
-		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar = new JButton("Limpar");
 		panel_2.add(btnLimpar);
 		
 		JPanel panel_1 = new JPanel();
@@ -189,7 +201,7 @@ public class ClienteView {
 			}
 		});
 		
-		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(206, 275, 98, 26);
 		panel_1.add(btnBuscar);
 		
@@ -215,5 +227,26 @@ public class ClienteView {
 		table.getColumnModel().getColumn(2).setPreferredWidth(178);
 		table.getColumnModel().getColumn(3).setPreferredWidth(359);
 		table.getColumnModel().getColumn(4).setPreferredWidth(153);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		Cliente cliente = new Cliente();
+		
+		if (arg0.getSource() == btnSalvar) {
+			
+		}
+		
+		if (arg0.getSource() == btnBuscar) {
+			
+		}
+		
+		if (arg0.getSource() == btnExcluir) {
+			
+		}
+		
+		if (arg0.getSource() == btnLimpar) {
+			
+		}
 	}
 }
