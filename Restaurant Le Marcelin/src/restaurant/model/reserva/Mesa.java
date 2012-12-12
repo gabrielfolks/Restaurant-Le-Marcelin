@@ -2,7 +2,7 @@ package restaurant.model.reserva;
 
 public class Mesa {
 	
-	
+	private int id;
 	private int numero;
 	private String zona;
 	private boolean fumante;
@@ -13,6 +13,14 @@ public class Mesa {
 		zona = "";
 		fumante = false;
 		lugares = 0;		
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getNumero() {
