@@ -17,6 +17,7 @@ public class Funcionario {
 	private float comissao;
 	private Cargo cargo;
 	private Login login;
+	private Franquia localTrabalho;
 	
 	public Funcionario() {
 		id = 0;
@@ -118,6 +119,14 @@ public class Funcionario {
 
 	public void setLogin(Login login) {
 		this.login = login;
+	}
+
+	public Franquia getLocalTrabalho() {
+		return localTrabalho;
+	}
+
+	public void setLocalTrabalho(Franquia localTrabalho) {
+		this.localTrabalho = localTrabalho;
 	}
 	
 	
