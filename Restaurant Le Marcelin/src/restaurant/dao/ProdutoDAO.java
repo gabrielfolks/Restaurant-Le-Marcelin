@@ -9,6 +9,7 @@ import java.util.Set;
 
 import restaurant.dao.interfaces.IProdutoDAO;
 import restaurant.dao.jdbc.Conexao;
+import restaurant.model.estoque.Fornecedor;
 import restaurant.model.estoque.Produto;
 
 public class ProdutoDAO implements IProdutoDAO {
@@ -68,6 +69,8 @@ public class ProdutoDAO implements IProdutoDAO {
 			callStmt.setBoolean(10, produto.isFabricacaoPropria());
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			fecharTudo();
 		}
 
 	}
@@ -86,12 +89,52 @@ public class ProdutoDAO implements IProdutoDAO {
 			prepStmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			fecharTudo();
 		}
 	}
 
 	@Override
 	public Produto pesquisar(int codigo) {
-		return null;
+		connection = Conexao.getConexao();
+		
+		Produto produto = new Produto();
+		
+		String sql = "SELECT idMercadoria, codigo, nome, valor," +
+				" tempoPreparo, quantMedida, medidaComercial, taxaDesconto, fabricacaoPropria," +
+				" f.idFornecedor, f.nome " +
+				"FROM Produto NATURAL JOIN Mercadoria NATURAL JOIN Fornecedor f WHERE codigo = ?";
+		
+		try {
+			prepStmt = connection.prepareStatement(sql);
+			prepStmt.setInt(1, codigo);
+			
+			resultSet = prepStmt.executeQuery();
+			
+			resultSet.first();
+			
+			produto.setId(resultSet.getInt(1));
+			produto.setCodigo(resultSet.getInt(2));
+			produto.setNome(resultSet.getString(3));
+			produto.setValor(resultSet.getFloat(4));
+			produto.setTempoPreparo(new java.util.Date(resultSet.getDate(5).getTime()));
+			produto.setQuantMedida(resultSet.getFloat(6));
+			produto.setMedidaComercial(resultSet.getString(7));
+			produto.setTaxaDesconto(resultSet.getFloat(8));
+			produto.setFabricacaoPropria(resultSet.getBoolean(9));
+			
+			Fornecedor fornecedor = new Fornecedor();
+			
+			fornecedor.setId(resultSet.getInt(10));
+			fornecedor.setNome(resultSet.getString(11));
+			
+			produto.setFornecedor(fornecedor);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		return produto;
 	}
 
 	private void fecharTudo() {
