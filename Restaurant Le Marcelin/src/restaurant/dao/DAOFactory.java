@@ -1,5 +1,6 @@
 package restaurant.dao;
 
+import restaurant.dao.interfaces.ICaixaDAO;
 import restaurant.dao.interfaces.ICardapioDAO;
 import restaurant.dao.interfaces.IClienteDAO;
 import restaurant.dao.interfaces.IFornecedorDAO;
@@ -48,5 +49,9 @@ public class DAOFactory {
 
 	public static IProdutoDAO createProdutoDAO() {
 		return new ProdutoDAO();
+	}
+	
+	public static ICaixaDAO createCaixaDAO(){
+		return new CaixaDAO();
 	}
 }
