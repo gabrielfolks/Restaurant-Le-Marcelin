@@ -20,8 +20,8 @@ public class ClienteController {
 		clienteDAO.remover(cliente);
 	}
 	
-	public void pesquisarPorCPF(String cpf) {
-		clienteDAO.procurarClientePorCPF(cpf);
+	public Cliente pesquisarPorCPF(String cpf) {
+		return clienteDAO.procurarClientePorCPF(cpf);
 	}
 	
 }
