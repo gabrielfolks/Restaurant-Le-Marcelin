@@ -1,7 +1,7 @@
 package restaurant.control.venda;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 
 import restaurant.model.reserva.Cliente;
 import restaurant.model.venda.Comanda;
