@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import restaurant.model.venda.Caixa;
 import restaurant.model.venda.Pagamento;
+ 
 
 public class CaixaController {
 
@@ -22,5 +23,7 @@ public class CaixaController {
 	public ArrayList<Pagamento> listaTransacoes(){
 		return null;
 	}
+	
+	
 	
 }

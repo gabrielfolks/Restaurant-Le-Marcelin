@@ -10,6 +10,16 @@ public class Caixa {
 	private Date dia;
 	private float valor;
 	private float valorInicial;
+	private boolean status;
+	
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 	private HashSet<Pagamento> pagamentos;
 	
 	public Caixa(float valorInicial) {		
