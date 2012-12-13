@@ -43,12 +43,14 @@ public class Pagamento {
 	
 	/** 
 	 * Percorre as comandas relacionadas, somando
-	 * e retornando o total. 
-	 * 
+	 * e retornando o total.  
 	 * @return Soma do valor das comandas.
 	 */
 	public float obtemTotal(){
-		return 0;
+		float valor = 0;		
+		for (Comanda c : comandas) 			
+			valor += c.getValor();		
+		return valor;
 	}
 	
 

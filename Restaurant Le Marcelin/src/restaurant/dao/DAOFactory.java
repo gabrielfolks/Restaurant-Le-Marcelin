@@ -7,9 +7,12 @@ import restaurant.dao.interfaces.IFornecedorDAO;
 import restaurant.dao.interfaces.IFranquiaDAO;
 import restaurant.dao.interfaces.IFuncionarioDAO;
 import restaurant.dao.interfaces.IMesaDAO;
+import restaurant.dao.interfaces.IPagamentoDAO;
 import restaurant.dao.interfaces.IPedidoDAO;
 import restaurant.dao.interfaces.IProdutoDAO;
 import restaurant.dao.interfaces.IReservaDAO;
+import restaurant.model.venda.Caixa;
+import restaurant.model.venda.Comanda;
 
 public class DAOFactory {
 
@@ -53,5 +56,17 @@ public class DAOFactory {
 	
 	public static ICaixaDAO createCaixaDAO(){
 		return new CaixaDAO();
+	}
+	
+	public static IPagamentoDAO createPagamentoDAO(Caixa caixa){		
+		return new PagamentoDAO(caixa);			
+	}
+	
+	public static IPagamentoDAO createPagamentoDAO(Caixa caixa, Comanda comanda){
+		
+		PagamentoDAO pag = new PagamentoDAO(caixa);
+		pag.setCom(comanda);
+		
+		return pag;
 	}
 }

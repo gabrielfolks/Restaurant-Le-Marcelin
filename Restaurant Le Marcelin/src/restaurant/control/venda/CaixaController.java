@@ -4,14 +4,22 @@ import java.util.ArrayList;
 
 import restaurant.dao.DAOFactory;
 import restaurant.dao.interfaces.ICaixaDAO;
+import restaurant.dao.interfaces.IPagamentoDAO;
 import restaurant.model.venda.Caixa;
 import restaurant.model.venda.Pagamento;
  
 
 public class CaixaController {
 
-	private ICaixaDAO dao = DAOFactory.createCaixaDAO();
+	private ICaixaDAO caixaDAO;
+	private IPagamentoDAO pagDAO;
 			
+	public CaixaController(){
+		
+		caixaDAO = DAOFactory.createCaixaDAO();
+		pagDAO = DAOFactory.createPagamentoDAO(caixaDAO.obtemCaixaCorrente());
+	}
+	
 	public void abrirCaixa(float valorInicial) throws Exception{
 		Caixa c = new Caixa(valorInicial);
 		Caixa ca = getCaixaAtual();
@@ -20,7 +28,7 @@ public class CaixaController {
 			throw new Exception("O Caixa já está aberto");
 		else{
 			c.setStatus(true);
-			dao.adicionar(c);
+			caixaDAO.adicionar(c);
 		}
 	}
 	
@@ -32,18 +40,18 @@ public class CaixaController {
 			throw new Exception("O Caixa já está fechado!");
 		}else{		
 			c.setStatus(false);
-			dao.atualizar(c);
+			caixaDAO.atualizar(c);
 		}
 	}
 	
 	public Caixa getCaixaAtual(){
 		
-		return dao.obtemCaixaCorrente();
+		return caixaDAO.obtemCaixaCorrente();
 		
 	}
 	
 	public ArrayList<Pagamento> listaTransacoes(){
-		return null;
+		return null; 
 	}
 	
 	
