@@ -9,7 +9,7 @@ import restaurant.model.reserva.Reserva;
 
 public class ReservaController {
 
-	IReservaDAO reservaDAO = DAOFactory.createReservaDAO();
+IReservaDAO reservaDAO = DAOFactory.createReservaDAO();
 	
 	public void adicionar(Reserva reserva) {
 		reservaDAO.adicionar(reserva);
@@ -23,8 +23,9 @@ public class ReservaController {
 		reservaDAO.atualizar(reserva);
 	}
 	
-	public Set<Reserva> procurarPorData(Date dataReserva) {
+	public Reserva procurarPorData(Date dataReserva) {
 		return reservaDAO.procurarPorData(dataReserva);
 	}
+	
 	
 }

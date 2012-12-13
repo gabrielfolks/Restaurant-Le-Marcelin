@@ -1,27 +1,134 @@
 package restaurant.view.reserva;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.JPanel;
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JSpinner;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.SpinnerDateModel;
-import java.util.Date;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
-import javax.swing.SpinnerNumberModel;
+import java.util.Date;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
+import javax.swing.SpinnerNumberModel;
+
+import restaurant.control.reserva.ClienteController;
+import restaurant.control.reserva.MesaController;
+import restaurant.control.reserva.ReservaController;
+import restaurant.model.reserva.Cliente;
+import restaurant.model.reserva.Mesa;
+import restaurant.model.reserva.Reserva;
+import restaurant.util.MascarasCampos;
+import restaurant.view.tablemodel.ReservaTableModel;
+import javax.swing.JCheckBox;rt javax.swing.SpinnerDateModel;
+
+import javax.swing.SpinnerNumberModel;
+
+import restaurant.control.reserva.ClienteController;
+import restaurant.control.reserva.MesaController;
+import restaurant.control.reserva.ReservaController;
+import restaurant.model.reserva.Cliente;
+import restaurant.model.reserva.Mesa;
+import restaurant.model.reserva.Reserva;
+import restaurant.util.MascarasCampos;
+import restaurant.view.tablemodel.ReservaTableModel;
+import javax.swing.JCheckBox;
+import javax.swing.SpinnerNumberModel;
+
+import restaurant.control.reserva.ClienteController;
+import restaurant.control.reserva.MesaController;
+import restaurant.control.reserva.ReservaController;
+import restaurant.model.reserva.Cliente;
+import restaurant.model.reserva.Mesa;
+import restaurant.model.reserva.Reserva;
+import restaurant.util.MascarasCampos;
+import restaurant.view.tablemodel.ReservaTableModel;
+import javax.swing.JCheckBox;avax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+		this.getContentPane().add(tfCNPJ);
+import javax.swing.SpinnerDateModel;
+import javax.swing.SpinnerNumberModel;
+
+import restaurant.control.reserva.ClienteController;
+import restaurant.control.reserva.MesaController;
+import restaurant.control.reserva.ReservaController;
+import restaurant.model.reserva.Cliente;
+import restaurant.model.reserva.Mesa;
+import restaurant.model.reserva.Reserva;
+import restaurant.util.MascarasCampos;
+import restaurant.view.tablemodel.ReservaTableModel;
+import javax.swing.JCheckBox;
+		
+		cboEstado = new JComboBox<String>();
+		cboEstado.setModel(new DefaultComboBoxModel(new String[] {"AC", "AL", "AP", "AM ", "BA", "CE", "DF", "ES", "GO ", "MA", "MT", "MS", "MG", "PA ", "PB", "PR", "PE", "PI", "RJ", "RN ", "RS", "RO", "RR", "SC", "SP", "SE", "TO"}));
+		cboEstado.setBounds(106, 172, 51, 20);
+		this.getContentPane().add(cboEstado);
+		this.setBounds(100, 100, 581, 295);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		Franquia f = new Franquia();
+		FranquiaController fc = new FranquiaController();
+		
+		if (arg0.getSource() == btnSalvar) {
+			f.setRazao(tfRazao.getText());
+			f.setFantasia(tfFantasia.getText());
+			f.setEndereco(tfEndereco.getText());
+			f.setCEP((String)tfCEP.getValue());
+			f.setCnpj((String) tfCNPJ.getValue());
+			f.setCidade(tfCidade.getText());
+			f.setEstado((String)cboEstado.getSelectedItem());
+			
+			fc.adicionarFranquia(f);
+		}
+		
+rt javax.swing.SpinnerDateModel;
+
+import javax.swing.SpinnerNumberModel;
+
+import restaurant.control.reserva.ClienteController;
+import restaurant.control.reserva.MesaController;
+import restaurant.control.reserva.ReservaController;
+import restaurant.model.reserva.Cliente;
+import restaurant.model.reserva.Mesa;
+import restaurant.model.reserva.Reserva;
+import restaurant.util.MascarasCampos;
+import restaurant.view.tablemodel.ReservaTableModel;
+import javax.swing.JCheckBox;
+import javax.swing.SpinnerNumberModel;
+
+import restaurant.control.reserva.ClienteController;
+import restaurant.control.reserva.MesaController;
+import restaurant.control.reserva.ReservaController;
+import restaurant.model.reserva.Cliente;
+import restaurant.model.reserva.Mesa;
+import restaurant.model.reserva.Reserva;
+import restaurant.util.MascarasCampos;
+import restaurant.view.tablemodel.ReservaTableModel;
+import javax.swing.JCheckBox;
 
 public class ReservaView {
 

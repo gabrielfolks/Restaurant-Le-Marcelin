@@ -2,25 +2,25 @@ package restaurant.model.venda;
 
 import java.util.HashSet;
 
-import restaurant.util.Forma;
+import restaurant.util.FormaPagamento;
 
 public class Pagamento {
 	
-	private Forma formaPagamento;
+	private FormaPagamento formaPagamento;
 	private int quantidadeParecelas;
 	private HashSet<Comanda> comandas;
 	
 	public Pagamento() {
-		formaPagamento = Forma.DINHEIRO;
+		formaPagamento = FormaPagamento.DINHEIRO;
 		quantidadeParecelas = 0;
 		comandas = new HashSet<>();
 	}
 
-	public Forma getFormaPagamento() {
+	public FormaPagamento getFormaPagamento() {
 		return formaPagamento;
 	}
 
-	public void setFormaPagamento(Forma formaPagamento) {
+	public void setFormaPagamento(FormaPagamento formaPagamento) {
 		this.formaPagamento = formaPagamento;
 	}
 

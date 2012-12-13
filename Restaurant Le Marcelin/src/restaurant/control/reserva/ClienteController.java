@@ -1,11 +1,14 @@
 package restaurant.control.reserva;
 
+import java.util.List;
+
 import restaurant.dao.DAOFactory;
 import restaurant.dao.interfaces.IClienteDAO;
 import restaurant.model.reserva.Cliente;
 
 public class ClienteController {
 
+	
 	IClienteDAO clienteDAO = DAOFactory.createClienteDAO();
 	
 	public void adicionar(Cliente cliente) {
@@ -20,8 +23,11 @@ public class ClienteController {
 		clienteDAO.remover(cliente);
 	}
 	
-	public void pesquisarPorCPF(String cpf) {
-		clienteDAO.procurarClientePorCPF(cpf);
+	public Cliente pesquisarPorCPF(String cpf) {
+		return clienteDAO.procurarClientePorCPF(cpf);
 	}
-	
+
+	public List<Cliente> pesquisarPorNome(String nome) {
+		return null;
+	}
 }

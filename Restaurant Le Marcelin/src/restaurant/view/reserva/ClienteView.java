@@ -5,14 +5,17 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.naming.ldap.Rdn;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -20,11 +23,13 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
+import javax.swing.SwingConstants;
 
 import restaurant.control.reserva.ClienteController;
 import restaurant.model.reserva.Cliente;
+import restaurant.util.MascarasCampos;
+import restaurant.view.tablemodel.ClienteTableModel;
+
 
 public class ClienteView implements ActionListener {
 
@@ -39,11 +44,15 @@ public class ClienteView implements ActionListener {
 	private JTable table;
 	private JFormattedTextField tfBusca;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JButton btnSalvar;
-	private JButton btnExcluir;
+
+	private JButton btnCadastrar;
 	private JButton btnLimpar;
 	private JButton btnBuscar;
 	private JRadioButton rbCPF;
+	private ClienteController clienteController;
+	private JButton btnExcluir;
+	private JRadioButton rbNome;
+	private ClienteTableModel clienteTableModel;
 	
 	/**
 	 * Launch the application.

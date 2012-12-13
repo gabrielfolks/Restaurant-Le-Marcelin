@@ -88,6 +88,7 @@ class ReservaDAO implements IReservaDAO {
 	}
 	
 	@Override
+<<<<<<< HEAD
 	public Set<Reserva> procurarPorData(Date dataReserva) {
 		connection = Conexao.getConexao();
 		
@@ -140,6 +141,56 @@ class ReservaDAO implements IReservaDAO {
 		}
 		
 		return reservas;
+=======
+	public Reserva procurarPorData(Date dataReserva) {
+		connection = Conexao.getConexao();
+		
+		Reserva reserva = new Reserva();
+		
+		String sql = 
+				"SELECT r.idReserva, r.data, c.idCliente, c.nome, c.telefone, c.endereco, c.cpf"+ 
+				"m.idMesa, m.numero, m.zona, m.fumante, m.lugares FROM Reserva r"+ 
+				"NATURAL JOIN Cliente c NATURAL JOIN Mesa m WHERE data = ?";
+		
+		try {
+			prepStmt = connection.prepareStatement(sql);
+			prepStmt.setDate(1, new java.sql.Date(dataReserva.getTime()));
+			
+			resultSet = prepStmt.executeQuery();
+			
+			while (resultSet.next()) {
+				reserva.setId(resultSet.getInt(1));
+				reserva.setData(new java.util.Date(resultSet.getDate(2).getTime()));
+				
+				Cliente cliente = new Cliente();
+				
+				cliente.setId(resultSet.getInt(3));
+				cliente.setNome(resultSet.getString(4));
+				cliente.setTelefone(resultSet.getString(5));
+				cliente.setEndereco(resultSet.getString(6));
+				cliente.setCpf(resultSet.getString(6));
+				
+				reserva.setCliente(cliente);
+				
+				Mesa mesa = new Mesa();
+				
+				mesa.setId(resultSet.getInt(7));
+				mesa.setNumero(resultSet.getInt(8));
+				mesa.setZona(resultSet.getString(9));
+				mesa.setFumante(resultSet.getBoolean(10));
+				mesa.setLugares(resultSet.getInt(11));
+				
+				reserva.setMesa(mesa);	
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			fecharTudo();
+		}
+		
+		return reserva;
+>>>>>>> refs/remotes/origin/view
 	}
 
 	private void fecharTudo() {

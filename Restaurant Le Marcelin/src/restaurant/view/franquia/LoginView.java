@@ -1,22 +1,27 @@
 package restaurant.view.franquia;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JTextField;
 import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-@SuppressWarnings("all")
-public class LoginView extends JFrame{
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
-	private JFrame frame;
+import restaurant.control.franquia.LoginController;
+import restaurant.model.franquia.Login;
+import restaurant.view.MenuPrincipalView;
+
+public class LoginView extends JFrame implements ActionListener {
+
 	private JTextField tfUsuario;
 	private JPasswordField pfSenha;
+	private JButton btnSair;
+	private JButton btnLogin;
 
 	/**
 	 * Launch the application.
@@ -74,19 +79,40 @@ public class LoginView extends JFrame{
 		pfSenha.setBounds(90, 69, 153, 28);
 		this.getContentPane().add(pfSenha);
 		
-		JButton btnOk = new JButton("Ok");
-		btnOk.setBounds(52, 130, 78, 26);
-		this.getContentPane().add(btnOk);
+		btnLogin = new JButton("Login");
+		btnLogin.setBounds(52, 130, 78, 26);
+		btnLogin.addActionListener(this);
+		this.getContentPane().add(btnLogin);
 		
-		JButton btnSair = new JButton("Sair");
-		btnSair.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {				
-				System.exit(0);				
-			}
-		});
+		btnSair = new JButton("Sair");
+		btnSair.addActionListener(this);
 		
 		btnSair.setBounds(165, 130, 78, 26);
 		this.getContentPane().add(btnSair);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnLogin) {
+			Login l = new Login();
+			LoginController lc = new LoginController();
+			
+			l.setUsuario(tfUsuario.getText());
+			pfSenha.getPassword();
+			
+			if (lc.verificarSenha(l)) {
+				this.dispose();
+				new MenuPrincipalView();
+			} else {
+				JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!",
+						"Erro", JOptionPane.ERROR_MESSAGE);
+			}
+			
+		} else if (arg0.getSource() == btnSair) {
+			System.exit(0);
+		}
+		
+		
+		
 	}
 }
