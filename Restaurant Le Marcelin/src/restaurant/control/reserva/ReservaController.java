@@ -23,7 +23,7 @@ public class ReservaController {
 		reservaDAO.atualizar(reserva);
 	}
 	
-	public Set<Reserva> procurarPorData(Date dataReserva) {
+	public Reserva procurarPorData(Date dataReserva) {
 		return reservaDAO.procurarPorData(dataReserva);
 	}
 	
