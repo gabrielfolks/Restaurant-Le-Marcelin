@@ -4,6 +4,7 @@ import java.beans.Statement;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import restaurant.dao.interfaces.ICaixaDAO;
@@ -15,7 +16,7 @@ public class CaixaDAO implements ICaixaDAO {
 	private final String INSERE_CAIXA = "Call Insere_Caixa(?, ?, ?, ?, ?)";
 	private final String ALTERA_CAIXA = "Call Altera_Caixa(?, ?, ?, ?, ?)";
 	private final String DELETA_CAIXA = "DELETE FROM Caixa where codigo = ?";
-	private final String SELECIONA_CAIXA = "SELECT codigo, dia, valorInicial, valor, status FROM Caixa ORDER BY dia desc";
+	private final String SELECIONA_CAIXA_CORRENTE = "SELECT codigo, dia, valorInicial, valor, status FROM Caixa ORDER BY dia desc LIMIT 1";
 	
 	@Override
 	public void adicionar(Caixa c) {
@@ -101,23 +102,31 @@ public class CaixaDAO implements ICaixaDAO {
 	@Override
 	public Caixa obtemCaixaCorrente() {
 		// TODO Auto-generated method stub
-		Connection con = Conexao.getConexao();
-		PreparedStatement stm = con.prepareStatement(SELECIONA_CAIXA);
+		Caixa c = null;
+		
+		try {
+			Connection con = Conexao.getConexao();
+			PreparedStatement stm = con.prepareStatement(SELECIONA_CAIXA_CORRENTE);
+			ResultSet rs = stm.executeQuery();
+			
+			
+			if( rs.next() ){
+				c = new Caixa(0.0f);
+				c.setCodigo(rs.getInt("codigo"));
+				c.setDia(new java.util.Date(rs.getDate("dia").getTime()));
+				c.setValor(rs.getFloat("valor"));
+				c.setValorInicial(rs.getFloat("valorInicial"));				
+			}			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 				
-		return null;
+		return c;
 	}
 
-	@Override
-	public void sangria(Caixa c, float sangria) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void suprimento(Caixa c, float suprimento) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 }
