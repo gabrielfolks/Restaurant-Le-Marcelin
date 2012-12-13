@@ -10,8 +10,30 @@ public enum Medida {
 	
 	KG, // QUILO
 	MG, // MILIGRAMA
-	GR, // GRAMA
+	G, // GRAMA
 	L, // LITRO
-	ML // MILILITRO
+	ML; // MILILITRO
 
+	@Override
+	public String toString() {
+		String medida = "";
+		
+		switch(this) {
+			case KG:
+				medida = "kg";
+			case MG:
+				medida = "mg";
+			case G:
+				medida = "g";
+			case L:
+				medida = "l";
+			case ML:
+				medida = "ml";
+			default:
+				medida = "";
+		}
+		
+		return medida;
+	}
+	
 }
