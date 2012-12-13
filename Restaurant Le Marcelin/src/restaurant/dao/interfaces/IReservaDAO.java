@@ -7,6 +7,6 @@ import restaurant.model.reserva.Reserva;
 
 public interface IReservaDAO extends DAO<Reserva> {
 
-	Set<Reserva> procurarPorData(Date dataReserva);
+	Reserva procurarPorData(Date dataReserva);
 	
 }

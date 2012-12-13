@@ -104,7 +104,7 @@ public class ClienteDAO implements IClienteDAO {
 			cliente.setCpf(resultSet.getString(5));
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.err.println("Não há resultados para esta busca");
 			cliente = null;
 		} finally {
 			fecharTudo();

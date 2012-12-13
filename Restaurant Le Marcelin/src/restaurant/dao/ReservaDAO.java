@@ -88,10 +88,10 @@ class ReservaDAO implements IReservaDAO {
 	}
 	
 	@Override
-	public Set<Reserva> procurarPorData(Date dataReserva) {
+	public Reserva procurarPorData(Date dataReserva) {
 		connection = Conexao.getConexao();
 		
-		Set<Reserva> reservas = new HashSet<>();
+		Reserva reserva = new Reserva();
 		
 		String sql = 
 				"SELECT r.idReserva, r.data, c.idCliente, c.nome, c.telefone, c.endereco, c.cpf"+ 
@@ -105,8 +105,6 @@ class ReservaDAO implements IReservaDAO {
 			resultSet = prepStmt.executeQuery();
 			
 			while (resultSet.next()) {
-				Reserva reserva = new Reserva();
-				
 				reserva.setId(resultSet.getInt(1));
 				reserva.setData(new java.util.Date(resultSet.getDate(2).getTime()));
 				
@@ -128,9 +126,7 @@ class ReservaDAO implements IReservaDAO {
 				mesa.setFumante(resultSet.getBoolean(10));
 				mesa.setLugares(resultSet.getInt(11));
 				
-				reserva.setMesa(mesa);
-				
-				reservas.add(reserva);
+				reserva.setMesa(mesa);	
 			}
 			
 		} catch (SQLException e) {
@@ -139,7 +135,7 @@ class ReservaDAO implements IReservaDAO {
 			fecharTudo();
 		}
 		
-		return reservas;
+		return reserva;
 	}
 
 	private void fecharTudo() {
