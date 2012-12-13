@@ -1,27 +1,28 @@
 package restaurant.view.franquia;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
+
 import javax.swing.DefaultComboBoxModel;
-import restaurant.util.DiaSemana;
-import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JTable;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import restaurant.util.DiaSemana;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 
 public class CardapioView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfCodigoProduto;
-	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -45,18 +46,18 @@ public class CardapioView extends JFrame {
 	public CardapioView() {
 		setTitle("Cardapio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 558, 300);
+		setBounds(100, 100, 613, 440);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
+		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_1 = new JPanel();
-		panel.add(panel_1);
+		panel.add(BorderLayout.NORTH, panel_1);
 		
 		JLabel lblDiaDaSemana = new JLabel("Dia da Semana");
 		panel_1.add(lblDiaDaSemana);
@@ -66,42 +67,30 @@ public class CardapioView extends JFrame {
 		cbDiaSemana.setModel(new DefaultComboBoxModel(DiaSemana.values()));
 		
 		JPanel panel_2 = new JPanel();
-		panel.add(panel_2);
+		panel.add(BorderLayout.CENTER, panel_2);
+		panel_2.setLayout(new GridLayout(2, 2, 5, 5));
+		
+		JPanel panel_4 = new JPanel();
+		panel_2.add(panel_4);
 		
 		JLabel lblCdigoDoProduto = new JLabel("C\u00F3digo do Produto");
-		panel_2.add(lblCdigoDoProduto);
+		panel_4.add(lblCdigoDoProduto);
 		
 		tfCodigoProduto = new JTextField();
-		panel_2.add(tfCodigoProduto);
+		panel_4.add(tfCodigoProduto);
 		tfCodigoProduto.setColumns(10);
 		
 		JButton btnAdicionar = new JButton("Adicionar");
-		panel_2.add(btnAdicionar);
+		panel_4.add(btnAdicionar);
+		
+		JPanel panel_5 = new JPanel();
+		panel.add(panel_5, BorderLayout.SOUTH);
 		
 		JButton btnRemover = new JButton("Remover");
-		panel_2.add(btnRemover);
+		panel_5.add(btnRemover);
 		
-		JButton btnSalvar = new JButton("Salvar");
-		panel_2.add(btnSalvar);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		panel.add(scrollPane);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"C\u00F3digo", "Nome", "Valor"
-			}
-		));
-		scrollPane.setViewportView(table);
-		
-		JLabel label = new JLabel("");
-		panel.add(label);
+		JButton btnSalvar = new JButton("Salvar card\u00E1pio");
+		panel_5.add(btnSalvar);
 	}
 
 }

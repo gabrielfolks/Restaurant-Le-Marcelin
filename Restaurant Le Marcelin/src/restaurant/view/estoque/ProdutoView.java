@@ -80,57 +80,58 @@ public class ProdutoView {
 		frmRestaurantLeMarcelin.getContentPane().add(panel);
 		panel.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		panel.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel painelProduto = new JPanel();
+		panel.add(painelProduto);
+		painelProduto.setLayout(null);
 		
 		JLabel lblCdigo = new JLabel("C\u00F3digo");
 		lblCdigo.setBounds(12, 12, 55, 16);
-		panel_1.add(lblCdigo);
+		painelProduto.add(lblCdigo);
 		
 		tfCodigo = new JTextField();
 		tfCodigo.setBounds(72, 10, 114, 20);
-		panel_1.add(tfCodigo);
+		painelProduto.add(tfCodigo);
 		tfCodigo.setColumns(10);
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setBounds(12, 40, 55, 16);
-		panel_1.add(lblNome);
+		painelProduto.add(lblNome);
 		
 		tfNome = new JTextField();
 		tfNome.setBounds(72, 38, 491, 20);
-		panel_1.add(tfNome);
+		painelProduto.add(tfNome);
 		tfNome.setColumns(10);
 		
 		JLabel lblValorR = new JLabel("Valor");
 		lblValorR.setBounds(12, 68, 55, 16);
-		panel_1.add(lblValorR);
+		painelProduto.add(lblValorR);
 		
 		tfValor = new JFormattedTextField(MascarasCampos.getDinheiroMask());
 		tfValor.setBounds(72, 66, 114, 20);
-		panel_1.add(tfValor);
+		painelProduto.add(tfValor);
 		tfValor.setColumns(10);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Estoque", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		panel_5.setBounds(312, 70, 251, 105);
-		panel_1.add(panel_5);
+		panel_5.setBounds(312, 70, 293, 111);
+		painelProduto.add(panel_5);
+		panel_5.setLayout(new GridLayout(3, 2));
 		
-		JLabel lblQtdeAtual = new JLabel("Qtde. Atual");
+		JLabel lblQtdeAtual = new JLabel("Quantidade atual");
 		panel_5.add(lblQtdeAtual);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
 		panel_5.add(textField);
 		
-		JLabel lblQtdeMax = new JLabel("Qtde. Max.");
+		JLabel lblQtdeMax = new JLabel("Quantidade m\u00E1xima");
 		panel_5.add(lblQtdeMax);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		panel_5.add(textField_2);
 		
-		JLabel lblQtdeMin = new JLabel("Qtde. Min.");
+		JLabel lblQtdeMin = new JLabel("Quantidade m\u00EDnima");
 		panel_5.add(lblQtdeMin);
 		
 		textField_3 = new JTextField();
@@ -140,84 +141,84 @@ public class ProdutoView {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setToolTipText("Busca a Mercadoria pelo ID. Caso n\u00E3o exista, libera para um novo cadastro.");
 		btnBuscar.setBounds(198, 7, 98, 26);
-		panel_1.add(btnBuscar);
+		painelProduto.add(btnBuscar);
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(12, 175, 98, 26);
-		panel_1.add(btnSalvar);
+		painelProduto.add(btnSalvar);
 		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBounds(122, 175, 98, 26);
-		panel_1.add(btnExcluir);
+		painelProduto.add(btnExcluir);
 		
-		JPanel panel_2 = new JPanel();
-		panel.add(panel_2);
-		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel painelIngrediente = new JPanel();
+		panel.add(painelIngrediente);
+		painelIngrediente.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		panel_2.add(tabbedPane_1);
+		painelIngrediente.add(tabbedPane_1);
 		
-		JPanel panel_3 = new JPanel();
-		tabbedPane_1.addTab("Produto", null, panel_3, null);
-		panel_3.setLayout(null);
+		JPanel abaProduto = new JPanel();
+		tabbedPane_1.addTab("Produto", null, abaProduto, null);
+		abaProduto.setLayout(null);
 		
 		JCheckBox chckbxFabricaoPrpria = new JCheckBox("Fabrica\u00E7\u00E3o Pr\u00F3pria");
 		chckbxFabricaoPrpria.setBounds(8, 8, 146, 24);
-		panel_3.add(chckbxFabricaoPrpria);
+		abaProduto.add(chckbxFabricaoPrpria);
 		
 		tfMedida = new JTextField();
 		tfMedida.setBounds(71, 40, 114, 20);
-		panel_3.add(tfMedida);
+		abaProduto.add(tfMedida);
 		tfMedida.setColumns(10);
 		
 		JLabel label = new JLabel("Medida");
 		label.setBounds(8, 40, 55, 16);
-		panel_3.add(label);
+		abaProduto.add(label);
 		
 		JComboBox cbMedida = new JComboBox();
 		cbMedida.setModel(new DefaultComboBoxModel(Medida.values()));
 		cbMedida.setBounds(197, 38, 92, 25);
-		panel_3.add(cbMedida);
+		abaProduto.add(cbMedida);
 		
 		JLabel lblDescR = new JLabel("Desconto");
 		lblDescR.setBounds(8, 72, 55, 16);
-		panel_3.add(lblDescR);
+		abaProduto.add(lblDescR);
 		
 		tfTaxaDesconto = new JFormattedTextField(MascarasCampos.getDinheiroMask());
 		tfTaxaDesconto.setColumns(10);
 		tfTaxaDesconto.setBounds(71, 72, 114, 20);
-		panel_3.add(tfTaxaDesconto);
+		abaProduto.add(tfTaxaDesconto);
 		
 		JLabel lbl = new JLabel("Tempo Preparo");
 		lbl.setBounds(8, 100, 98, 16);
-		panel_3.add(lbl);
+		abaProduto.add(lbl);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(112, 98, 114, 20);
-		panel_3.add(textField_1);
+		abaProduto.add(textField_1);
 		
 		JLabel lblIngrediente = new JLabel("Ingrediente");
 		lblIngrediente.setBounds(317, 12, 71, 16);
-		panel_3.add(lblIngrediente);
+		abaProduto.add(lblIngrediente);
 		
 		tfIngrediente = new JTextField();
 		tfIngrediente.setToolTipText("Digite o c\u00F3digo do Insumo e preencha no Grid.");
 		tfIngrediente.setColumns(10);
 		tfIngrediente.setBounds(392, 10, 114, 20);
-		panel_3.add(tfIngrediente);
+		abaProduto.add(tfIngrediente);
 		
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.setBounds(518, 7, 98, 26);
-		panel_3.add(btnAdicionar);
+		abaProduto.add(btnAdicionar);
 		
 		JButton btnRemover = new JButton("Remover");
 		btnRemover.setBounds(625, 7, 98, 26);
-		panel_3.add(btnRemover);
+		abaProduto.add(btnRemover);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(317, 37, 453, 136);
-		panel_3.add(scrollPane);
+		abaProduto.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
@@ -245,18 +246,18 @@ public class ProdutoView {
 			}
 		});
 		
-		JPanel panel_4 = new JPanel();
-		tabbedPane_1.addTab("Insumo", null, panel_4, null);
-		panel_4.setLayout(null);
+		JPanel abaInsumo = new JPanel();
+		tabbedPane_1.addTab("Insumo", null, abaInsumo, null);
+		abaInsumo.setLayout(null);
 		
 		lblUnd = new JLabel();
 		lblUnd.setBounds(12, 9, 107, 16);
 		lblUnd.setText("Unidade de Medida");
-		panel_4.add(lblUnd);
+		abaInsumo.add(lblUnd);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(137, 5, 164, 25);
 		comboBox.setModel(new DefaultComboBoxModel(Medida.values()));
-		panel_4.add(comboBox);
+		abaInsumo.add(comboBox);
 	}
 }

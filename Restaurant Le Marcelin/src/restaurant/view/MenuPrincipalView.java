@@ -1,48 +1,28 @@
 package restaurant.view;
 
+import java.awt.CardLayout;
+import java.awt.Container;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.swing.JMenu;
-import javax.swing.JDesktopPane;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
-import restaurant.view.venda.ComandaPedidoView;
+import restaurant.view.estoque.FornecedorView;
+import restaurant.view.reserva.ClienteView;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
+public class MenuPrincipalView extends JFrame implements ActionListener {
 
-public class MenuPrincipalView implements ActionListener {
+	private JMenuItem mntmManterClientes;
+	private JPanel painelPrincipal;
+	private JMenuItem mntmManterFuncionrios;
+	private JMenuItem mntmManterFornecedores;
+	private CardLayout layout;
 
-	private JFrame frmAdministraoRestaurant;
-	private JMenu mnCardapio;
-	private JMenu mnPratos;
-	private JMenu mnProdutos;
-	private JMenu mnFornecedores;
-	private JMenu mnFuncionarios;
-	private JMenu mnClientes;
-	private JDesktopPane desktopPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuPrincipalView window = new MenuPrincipalView();
-					window.frmAdministraoRestaurant.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public MenuPrincipalView() {
 		initialize();
 	}
@@ -51,53 +31,67 @@ public class MenuPrincipalView implements ActionListener {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmAdministraoRestaurant = new JFrame();
-		frmAdministraoRestaurant.setTitle("Administra\u00E7\u00E3o - Restaurant Le Marcelin");
-		frmAdministraoRestaurant.setBounds(100, 100, 952, 488);
-		frmAdministraoRestaurant.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("Administra\u00E7\u00E3o - Restaurant Le Marcelin");
+		this.setBounds(100, 100, 952, 488);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
-		frmAdministraoRestaurant.setJMenuBar(menuBar);
+		this.setJMenuBar(menuBar);
 		
-		mnCardapio = new JMenu("Cardapio");
-		mnCardapio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				do_mnCardapio_actionPerformed(e);
-			}
-		});
-		menuBar.add(mnCardapio);
+		JMenu mnEstabelecimento = new JMenu("Estabelecimento");
+		menuBar.add(mnEstabelecimento);
 		
-		mnPratos = new JMenu("Pratos");
-		menuBar.add(mnPratos);
+		JMenuItem mntmReservas = new JMenuItem("Reserva de mesas");
+		mnEstabelecimento.add(mntmReservas);
 		
-		mnProdutos = new JMenu("Produtos");
-		menuBar.add(mnProdutos);
+		JMenu mnProduto = new JMenu("Produto");
+		menuBar.add(mnProduto);
 		
-		mnFornecedores = new JMenu("Fornecedores");
-		menuBar.add(mnFornecedores);
+		JMenuItem mntmManterCardpio = new JMenuItem("Manter card\u00E1pio");
+		mnProduto.add(mntmManterCardpio);
 		
-		mnFuncionarios = new JMenu("Funcion\u00E1rios");
-		menuBar.add(mnFuncionarios);
+		JMenu mnRh = new JMenu("Recursos Humanos");
+		menuBar.add(mnRh);
 		
-		mnClientes = new JMenu("Clientes");
-		menuBar.add(mnClientes);
-		frmAdministraoRestaurant.getContentPane().setLayout(new GridLayout(1, 1, 0, 0));
+		mntmManterClientes = new JMenuItem("Clientes");
+		mnRh.add(mntmManterClientes);
+		mntmManterClientes.addActionListener(this);
 		
-		desktopPane = new JDesktopPane();
-		frmAdministraoRestaurant.getContentPane().add(desktopPane);
+		mntmManterFuncionrios = new JMenuItem("Funcion\u00E1rios");
+		mnRh.add(mntmManterFuncionrios);
+		
+		mntmManterFornecedores = new JMenuItem("Fornecedores");
+		mnRh.add(mntmManterFornecedores);
+		mntmManterFornecedores.addActionListener(this);
+		
+		JMenu mnLogout = new JMenu("Logout...");
+		menuBar.add(mnLogout);
+		
+		painelPrincipal = new JPanel();
+		painelPrincipal.setLayout(layout);
+		
+		this.setContentPane(painelPrincipal);
+		setVisible(true);
 	}	
-	protected static void do_mnCardapio_actionPerformed(ActionEvent e) {
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == mnCardapio){
+		if (e.getSource() == mntmManterClientes) {
+			Container painelCliente = new ClienteView().getContentPane();
 			
-			JFrame cpv = new ComandaPedidoView().getFrmComandaRestaurant();
-			cpv.setVisible(true);
-			cpv.setSize(this.desktopPane.getSize());
-			this.desktopPane.add(cpv);
+			painelCliente.setSize(painelPrincipal.getSize());
+					
+			painelPrincipal.add("Cliente", painelCliente);
+			layout.show(painelPrincipal, "Cliente");
+			painelPrincipal.repaint();
+		} else if (e.getSource() == mntmManterFornecedores) {
+			Container painelFornecedores = new FornecedorView().getContentPane();
 			
+			painelFornecedores.setSize(painelPrincipal.getSize());
+			
+			painelPrincipal.add("Fornecedor", painelFornecedores);
+			layout.show(painelPrincipal, "Fornecedor");
+			painelPrincipal.repaint();
 		}
 		
 	}

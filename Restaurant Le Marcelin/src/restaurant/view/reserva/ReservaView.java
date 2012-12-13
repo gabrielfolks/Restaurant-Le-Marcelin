@@ -1,37 +1,62 @@
 package restaurant.view.reserva;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.JPanel;
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JSpinner;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.SpinnerDateModel;
-import java.util.Date;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
-import javax.swing.SpinnerNumberModel;
+import java.util.Date;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
+import javax.swing.SpinnerNumberModel;
 
-public class ReservaView {
+import restaurant.control.reserva.ClienteController;
+import restaurant.control.reserva.MesaController;
+import restaurant.control.reserva.ReservaController;
+import restaurant.model.reserva.Cliente;
+import restaurant.model.reserva.Mesa;
+import restaurant.model.reserva.Reserva;
+import restaurant.util.MascarasCampos;
+import restaurant.view.tablemodel.ReservaTableModel;
+import javax.swing.JCheckBox;
 
-	private JFrame frmRestaurantLeMarcelin;
-	private JTextField tfNumero;
+public class ReservaView extends JFrame implements ActionListener {
+
+	private JTextField tfNumeroMesaCadastro;
 	private JTextField tfZona;
-	private JTextField textField;
-	private JTextField textField_1;
 	private JTable table;
-
+	private JButton btnSalvarMesa;
+	private JButton btnExcluirMesa;
+	private JButton btnBuscarMesa;
+	private JButton btnListar;
+	private JButton btnSalvarReserva;
+	private JButton btnCancelarReserva;
+	private ReservaTableModel reservaTableModel;
+	private JFormattedTextField tfCPF;
+	private JTextField tfNumeroMesa;
+	private MesaController mesaController;
+	private ReservaController reservaController;
+	private JSpinner spDataConsulta;
+	private JSpinner spDataCadastro;
+	private JSpinner spLugares;
+	private JCheckBox cbFumante;
+	private JButton btnAlterarMesa;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -40,7 +65,7 @@ public class ReservaView {
 			public void run() {
 				try {
 					ReservaView window = new ReservaView();
-					window.frmRestaurantLeMarcelin.setVisible(true);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -59,193 +84,278 @@ public class ReservaView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmRestaurantLeMarcelin = new JFrame();
-		frmRestaurantLeMarcelin.setTitle("Restaurant Le Marcelin - Reservas");
-		frmRestaurantLeMarcelin.setBounds(100, 100, 800, 600);
-		frmRestaurantLeMarcelin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmRestaurantLeMarcelin.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		this.setTitle("Restaurant Le Marcelin - Reservas");
+		this.setBounds(100, 100, 800, 600);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		frmRestaurantLeMarcelin.getContentPane().add(tabbedPane);
+		this.getContentPane().add(tabbedPane);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		tabbedPane.addTab("Reservar", null, panel, null);
-		panel.setLayout(null);
-		
-		JLabel lblId_1 = new JLabel("ID");
-		lblId_1.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblId_1.setBounds(12, 14, 25, 16);
-		panel.add(lblId_1);
-		
-		textField = new JTextField();
-		textField.setFont(new Font("Dialog", Font.PLAIN, 15));
-		textField.setColumns(10);
-		textField.setBounds(108, 10, 78, 24);
-		panel.add(textField);
-		
-		JLabel lblCliente = new JLabel("Cliente");
-		lblCliente.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblCliente.setBounds(12, 53, 84, 16);
-		panel.add(lblCliente);
-		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-		textField_1.setColumns(10);
-		textField_1.setBounds(108, 46, 78, 24);
-		panel.add(textField_1);
-		
-		JLabel lblNome = new JLabel("Nome");
-		lblNome.setEnabled(false);
-		lblNome.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNome.setBounds(204, 53, 84, 16);
-		panel.add(lblNome);
+		JPanel abaReservar = new JPanel();
+		abaReservar.setBackground(Color.WHITE);
+		tabbedPane.addTab("Reservar", null, abaReservar, null);
+		abaReservar.setLayout(null);
 		
 		JLabel lblCpf = new JLabel("CPF");
 		lblCpf.setEnabled(false);
 		lblCpf.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblCpf.setBounds(383, 53, 84, 16);
-		panel.add(lblCpf);
+		lblCpf.setBounds(12, 11, 44, 16);
+		abaReservar.add(lblCpf);
 		
 		JLabel lblDatahora = new JLabel("Data/Hora");
 		lblDatahora.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblDatahora.setBounds(12, 95, 84, 16);
-		panel.add(lblDatahora);
+		lblDatahora.setBounds(10, 82, 84, 16);
+		abaReservar.add(lblDatahora);
 		
-		JSpinner spinData = new JSpinner();
-		spinData.setModel(new SpinnerDateModel(new Date(1352944800000L), null, new Date(32535136800000L), Calendar.DAY_OF_YEAR));
-		spinData.setFont(new Font("Dialog", Font.PLAIN, 15));
-		spinData.setBounds(108, 93, 165, 20);
-		panel.add(spinData);
+		spDataCadastro = new JSpinner();
+		spDataCadastro.setModel(new SpinnerDateModel(new Date(1352944800000L), null, new Date(32535136800000L), Calendar.DAY_OF_YEAR));
+		spDataCadastro.setFont(new Font("Dialog", Font.PLAIN, 15));
+		spDataCadastro.setBounds(104, 80, 165, 20);
+		abaReservar.add(spDataCadastro);
 		
-		JButton btnSalvar_1 = new JButton("Salvar");
-		btnSalvar_1.setBounds(12, 138, 98, 26);
-		panel.add(btnSalvar_1);
+		btnSalvarReserva = new JButton("Salvar reserva");
+		btnSalvarReserva.setBounds(84, 130, 140, 26);
+		btnSalvarReserva.addActionListener(this);
+		abaReservar.add(btnSalvarReserva);
 		
-		JButton btnLimpar1 = new JButton("Limpar");
-		btnLimpar1.setBounds(115, 138, 98, 26);
-		panel.add(btnLimpar1);
+		tfCPF = new JFormattedTextField(MascarasCampos.getCPFMask());
+		tfCPF.setBackground(Color.WHITE);
+		tfCPF.setBounds(84, 11, 129, 20);
+		abaReservar.add(tfCPF);
+		tfCPF.setColumns(10);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-		tabbedPane.addTab("Verificar Reservas", null, panel_2, null);
-		panel_2.setLayout(null);
+		JLabel lblNMesa = new JLabel("N\u00BA Mesa");
+		lblNMesa.setBounds(12, 45, 46, 14);
+		abaReservar.add(lblNMesa);
+		
+		tfNumeroMesa = new JTextField();
+		tfNumeroMesa.setBackground(Color.WHITE);
+		tfNumeroMesa.setBounds(84, 42, 86, 20);
+		abaReservar.add(tfNumeroMesa);
+		tfNumeroMesa.setColumns(10);
+		
+		JPanel abaConsultarReservas = new JPanel();
+		abaConsultarReservas.setBackground(Color.WHITE);
+		tabbedPane.addTab("Verificar Reservas", null, abaConsultarReservas, null);
+		abaConsultarReservas.setLayout(null);
 		
 		JLabel label = new JLabel("Data/Hora");
 		label.setBounds(12, 7, 70, 20);
 		label.setFont(new Font("Dialog", Font.BOLD, 15));
-		panel_2.add(label);
+		abaConsultarReservas.add(label);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerDateModel(new Date(1352944800000L), new Date(1352944800000L), new Date(32535136800000L), Calendar.DAY_OF_YEAR));
-		spinner.setBounds(100, 5, 173, 24);
-		spinner.setFont(new Font("Dialog", Font.PLAIN, 15));
-		panel_2.add(spinner);
+		spDataConsulta = new JSpinner();
+		spDataConsulta.setModel(new SpinnerDateModel(new Date(1352944800000L), new Date(1352944800000L), new Date(32535136800000L), Calendar.DAY_OF_YEAR));
+		spDataConsulta.setBounds(100, 5, 173, 24);
+		spDataConsulta.setFont(new Font("Dialog", Font.PLAIN, 15));
+		abaConsultarReservas.add(spDataConsulta);
 		
-		JButton btnListar = new JButton("Listar");
+		btnListar = new JButton("Listar");
 		btnListar.setBounds(12, 42, 98, 26);
-		panel_2.add(btnListar);
+		btnListar.addActionListener(this);
+		abaConsultarReservas.add(btnListar);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 80, 679, 209);
-		panel_2.add(scrollPane);
+		abaConsultarReservas.add(scrollPane);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"ID", "Cliente", "Mesa", "Data/Hora"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, Integer.class, Object.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+		reservaTableModel = new ReservaTableModel();
+		table = new JTable(reservaTableModel);
 		scrollPane.setViewportView(table);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
-		tabbedPane.addTab("Mesas", null, panel_1, null);
+		btnCancelarReserva = new JButton("Cancelar reserva");
+		btnCancelarReserva.setBounds(160, 44, 130, 23);
+		abaConsultarReservas.add(btnCancelarReserva);
+		
+		JPanel abaMesas = new JPanel();
+		abaMesas.setBackground(Color.WHITE);
+		tabbedPane.addTab("Mesas", null, abaMesas, null);
 		tabbedPane.setBackgroundAt(2, Color.WHITE);
-		panel_1.setLayout(null);
+		abaMesas.setLayout(null);
 		
 		JLabel lblId = new JLabel("N\u00FAmero");
 		lblId.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblId.setBounds(22, 26, 107, 16);
-		panel_1.add(lblId);
+		abaMesas.add(lblId);
 		
 		JLabel lblLugares = new JLabel("Lugares");
 		lblLugares.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblLugares.setBounds(22, 54, 68, 16);
-		panel_1.add(lblLugares);
+		abaMesas.add(lblLugares);
 		
 		JLabel lblFumante = new JLabel("Fumante");
 		lblFumante.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblFumante.setBounds(22, 86, 68, 16);
-		panel_1.add(lblFumante);
+		abaMesas.add(lblFumante);
 		
 		JLabel lblZona = new JLabel("Zona");
 		lblZona.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblZona.setBounds(22, 118, 107, 16);
-		panel_1.add(lblZona);
+		abaMesas.add(lblZona);
 		
-		tfNumero = new JTextField();
-		tfNumero.setFont(new Font("Dialog", Font.PLAIN, 15));
-		tfNumero.setBounds(96, 24, 159, 24);
-		panel_1.add(tfNumero);
-		tfNumero.setColumns(10);
+		tfNumeroMesaCadastro = new JTextField();
+		tfNumeroMesaCadastro.setFont(new Font("Dialog", Font.PLAIN, 15));
+		tfNumeroMesaCadastro.setBounds(96, 24, 43, 24);
+		abaMesas.add(tfNumeroMesaCadastro);
+		tfNumeroMesaCadastro.setColumns(10);
 		
 		tfZona = new JTextField();
 		tfZona.setFont(new Font("Dialog", Font.PLAIN, 15));
 		tfZona.setColumns(10);
 		tfZona.setBounds(96, 114, 159, 24);
-		panel_1.add(tfZona);
+		abaMesas.add(tfZona);
 		
-		JSpinner spLugares = new JSpinner();
-		spLugares.setModel(new SpinnerNumberModel(new Short((short) 0), new Short((short) 0), null, new Short((short) 1)));
+		spLugares = new JSpinner();
+		spLugares.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spLugares.setFont(new Font("Dialog", Font.PLAIN, 15));
 		spLugares.setBounds(96, 54, 43, 20);
-		panel_1.add(spLugares);
+		abaMesas.add(spLugares);
 		
-		JComboBox cbFumante = new JComboBox();
-		cbFumante.setBackground(Color.WHITE);
-		cbFumante.setModel(new DefaultComboBoxModel(new String[] {"N\u00E3o", "Sim"}));
-		cbFumante.setFont(new Font("Dialog", Font.BOLD, 15));
-		cbFumante.setBounds(96, 83, 68, 25);
-		panel_1.add(cbFumante);
+		btnBuscarMesa = new JButton("Buscar");
+		btnBuscarMesa.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		btnBuscarMesa.setBounds(177, 22, 121, 26);
+		btnBuscarMesa.addActionListener(this);
+		abaMesas.add(btnBuscarMesa);
 		
-		JButton btnBuscar = new JButton("Buscar mesa");
-		btnBuscar.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		btnBuscar.setBounds(269, 22, 121, 26);
-		panel_1.add(btnBuscar);
+		btnSalvarMesa = new JButton("Cadastrar");
+		btnSalvarMesa.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		btnSalvarMesa.setBounds(12, 160, 98, 26);
+		btnSalvarMesa.addActionListener(this);
+		abaMesas.add(btnSalvarMesa);
 		
-		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		btnSalvar.setBounds(12, 160, 98, 26);
-		panel_1.add(btnSalvar);
+		btnExcluirMesa = new JButton("Excluir");
+		btnExcluirMesa.setEnabled(false);
+		btnExcluirMesa.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		btnExcluirMesa.setBounds(227, 160, 98, 26);
+		btnExcluirMesa.addActionListener(this);
+		abaMesas.add(btnExcluirMesa);
 		
-		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		btnExcluir.setBounds(122, 160, 98, 26);
-		panel_1.add(btnExcluir);
+		cbFumante = new JCheckBox("");
+		cbFumante.setBounds(96, 86, 21, 23);
+		abaMesas.add(cbFumante);
 		
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		btnLimpar.setBounds(232, 160, 98, 26);
-		panel_1.add(btnLimpar);
+		btnAlterarMesa = new JButton("Alterar");
+		btnAlterarMesa.setEnabled(false);
+		btnAlterarMesa.setBounds(120, 164, 89, 24);
+		btnAlterarMesa.addActionListener(this);
+		abaMesas.add(btnAlterarMesa);
+		
+		mesaController = new MesaController();
+		reservaController = new ReservaController();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Reserva reserva;
+		Mesa mesa;
+		
+	
+		if (e.getSource() == btnSalvarReserva) {
+			reserva = new Reserva();
+			
+			reserva.setCliente(pesquisarCliente());
+			reserva.setMesa(pesquisarMesa());
+			reserva.setData((Date) spDataConsulta.getValue());
+			
+			reservaController.adicionar(reserva);
+			
+		}
+		
+		else if (e.getSource() == btnListar) {
+			reserva = reservaController.procurarPorData((Date) spDataConsulta.getValue());
+				
+				if (reserva == null) {
+					JOptionPane.showMessageDialog(null, "Nenhuma reserva encontrada!");
+				} else {
+					reservaTableModel.adicionarReserva(reserva); 
+				}
+		}
+		
+		else if (e.getSource() == btnCancelarReserva) {
+			if (table.getSelectedRow() == -1) {
+				JOptionPane.showMessageDialog(null, "Nenhuma reserva foi selecionada");
+			} else {
+				reservaController.remover(reservaTableModel.getReserva(table.getSelectedRow()));
+				JOptionPane.showMessageDialog(null, "Reserva cancelada com sucesso!", 
+						"Reservas", JOptionPane.INFORMATION_MESSAGE);
+				reservaTableModel.limpar();
+			}
+			
+		} else if (e.getSource() == btnSalvarMesa) {
+			mesa = criarMesa();
+			
+			mesaController.adicionarMesa(mesa);
+			
+			limparCamposMesa();
+		} else if (e.getSource() == btnBuscarMesa) {
+			mesa = pesquisarMesa();
+			
+			if (mesa == null) {
+				JOptionPane.showMessageDialog(null, "Mesa não encontrada");
+			} else {
+				tfNumeroMesaCadastro.setText(Integer.toString(mesa.getNumero()));
+				spLugares.setValue(mesa.getLugares());
+				cbFumante.setSelected(mesa.isFumante());
+				tfZona.setText(mesa.getZona());
+			
+				btnAlterarMesa.setEnabled(true);
+				btnExcluirMesa.setEnabled(true);
+			}
+		} else if (e.getSource() == btnAlterarMesa) {
+			mesa = criarMesa();
+			
+			mesaController.atualizarMesa(mesa);
+			
+			limparCamposMesa();
+			
+		} else if (e.getSource() == btnExcluirMesa) {
+			mesa = criarMesa();
+
+			mesaController.removerMesa(mesa);
+			
+			limparCamposMesa();
+		}
+		
+	}
+
+	private Mesa pesquisarMesa() {
+		int numeroMesa = Integer.parseInt(tfNumeroMesaCadastro.getText());
+		Mesa mesa = mesaController.pesquisarMesaPorNumero(numeroMesa);
+
+		return mesa;
+		
+	}
+
+	private Cliente pesquisarCliente() {
+		Cliente	cliente = new ClienteController().pesquisarPorCPF((String) tfCPF.getValue());
+		
+		if (cliente == null) {
+			JOptionPane.showConfirmDialog(null, "Cliente não encontrado");
+		}
+		
+		return cliente;
+	}
+	
+	private Mesa criarMesa() {
+		Mesa mesa = new Mesa();
+			
+		mesa.setNumero(Integer.parseInt(tfNumeroMesaCadastro.getText()));
+		
+		mesa.setLugares((int)spLugares.getValue());
+		mesa.setFumante(cbFumante.isSelected());
+		mesa.setZona(tfZona.getText());
+		
+		btnAlterarMesa.setEnabled(false);
+		btnExcluirMesa.setEnabled(false);
+					
+		return mesa;
+	}
+	
+	private void limparCamposMesa() {
+		tfNumeroMesaCadastro.setText("");
+		spLugares.setValue(0);
+		cbFumante.setSelected(false);
+		tfZona.setText("");
 	}
 }

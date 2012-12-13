@@ -1,37 +1,32 @@
 package restaurant.view.franquia;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JFormattedTextField;
-import javax.swing.JComboBox;
+import java.awt.GridLayout;
+import java.text.ParseException;
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
+
 import restaurant.util.Cargo;
 import restaurant.util.DateTextField;
-
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
-
-import java.text.ParseException;
-import java.util.Date;
-import java.util.Calendar;
-import javax.swing.JButton;
-import javax.swing.text.MaskFormatter;
-import javax.swing.JTabbedPane;
-import javax.swing.JPanel;
-import java.awt.GridLayout;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import restaurant.util.MascarasCampos;
 
 public class FuncionarioView {
 
 	private JFrame frmRestaurantLeMarcelin;
-	private JTextField txtId;
 	private JTextField tfCTPS;
 	private JFormattedTextField tfCPF;
 	private JComboBox cbCargo;
@@ -40,6 +35,10 @@ public class FuncionarioView {
 	private JFormattedTextField tfTelefone;
 	private JTable table;
 	private JTextField tfFiltro;
+	private JButton btnBuscar;
+	private JButton btnExcluir;
+	private JButton btnSalvar;
+	private JButton btnLimpar;
 
 	/**
 	 * Launch the application.
@@ -71,161 +70,142 @@ public class FuncionarioView {
 		frmRestaurantLeMarcelin = new JFrame();
 		frmRestaurantLeMarcelin.setTitle("Restaurant Le Marcelin - Funcion\u00E1rio");
 		frmRestaurantLeMarcelin.getContentPane().setBackground(Color.WHITE);
-		frmRestaurantLeMarcelin.setBounds(100, 100, 680, 385);
+		frmRestaurantLeMarcelin.setBounds(100, 100, 680, 410);
 		frmRestaurantLeMarcelin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		frmRestaurantLeMarcelin.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmRestaurantLeMarcelin.getContentPane().add(tabbedPane);
-		
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("Cadastro", null, panel, null);
-		panel.setLayout(null);
-		
-		JLabel lblFuncionrio = new JLabel("Funcion\u00E1rio");
-		lblFuncionrio.setBounds(12, 16, 77, 21);
-		panel.add(lblFuncionrio);
-		lblFuncionrio.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		
-		txtId = new JTextField();
-		txtId.setBounds(99, 12, 88, 29);
-		panel.add(txtId);
-		txtId.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		txtId.setColumns(10);
-		
-		JLabel lblCtps = new JLabel("CTPS");
-		lblCtps.setBounds(12, 121, 97, 21);
-		panel.add(lblCtps);
-		lblCtps.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		
-		tfCTPS = new JTextField();
-		tfCTPS.setBounds(99, 117, 194, 29);
-		panel.add(tfCTPS);
-		tfCTPS.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		tfCTPS.setColumns(10);
-		
-		JLabel lblCpf = new JLabel("CPF");
-		lblCpf.setBounds(12, 86, 97, 21);
-		panel.add(lblCpf);
-		lblCpf.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		try {
 			MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
 			cpfMask.setValidCharacters("0123456789");
 			cpfMask.setValueContainsLiteralCharacters(false);
-			tfCPF = new JFormattedTextField(cpfMask);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		tfCPF.setBounds(99, 82, 194, 29);
-		panel.add(tfCPF);
-		tfCPF.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		tfCPF.setColumns(10);
-		
-		JLabel lblCargo = new JLabel("Cargo");
-		lblCargo.setBounds(311, 121, 97, 21);
-		panel.add(lblCargo);
-		lblCargo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		
-		cbCargo = new JComboBox<Cargo>();
-		cbCargo.setBounds(363, 117, 194, 29);
-		panel.add(cbCargo);
-		cbCargo.setModel(new DefaultComboBoxModel(Cargo.values()));
-		cbCargo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		
-		JLabel lblComisso = new JLabel("Comiss\u00E3o");
-		lblComisso.setBounds(311, 154, 97, 21);
-		panel.add(lblComisso);
-		lblComisso.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		
-		JTextField tfComissao = new JTextField();
-		tfComissao.setBounds(388, 154, 194, 29);
-		panel.add(tfComissao);
-		tfComissao.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		tfComissao.setColumns(10);
-		
-		JLabel lblEndereo = new JLabel("Endere\u00E7o");
-		lblEndereo.setBounds(12, 201, 97, 21);
-		panel.add(lblEndereo);
-		lblEndereo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		
-		JTextField tfEndereco = new JTextField();
-		tfEndereco.setBounds(99, 195, 440, 29);
-		panel.add(tfEndereco);
-		tfEndereco.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		tfEndereco.setColumns(10);
-		
-		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(12, 53, 97, 21);
-		panel.add(lblNome);
-		lblNome.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		
-		tfNome = new JTextField();
-		tfNome.setBounds(98, 49, 344, 29);
-		panel.add(tfNome);
-		tfNome.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		tfNome.setColumns(10);
-
-		JTextField tfDate = new DateTextField();
-		tfDate.setBounds(402, 83, 131, 29);
-		panel.add(tfDate);
-		
-		JLabel lblSalrio = new JLabel("Sal\u00E1rio");
-		lblSalrio.setBounds(12, 158, 97, 21);
-		panel.add(lblSalrio);
-		lblSalrio.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(199, 15, 98, 26);
-		panel.add(btnBuscar);
-		
-		JLabel lblTelefone = new JLabel("Telefone");
-		lblTelefone.setBounds(12, 236, 97, 21);
-		panel.add(lblTelefone);
-		lblTelefone.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		try {
 			MaskFormatter telefoneMask = new MaskFormatter("(##) #####-####");
 			telefoneMask.setValidCharacters("0123456789");
 			telefoneMask.setValueContainsLiteralCharacters(false);
-			tfTelefone = new JFormattedTextField(telefoneMask);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		tfTelefone.setBounds(99, 234, 194, 29);
-		panel.add(tfTelefone);
-		tfTelefone.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		tfTelefone.setColumns(10);
 		
-		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(142, 275, 98, 26);
-		panel.add(btnSalvar);
+		JPanel abaCadastro = new JPanel();
+		tabbedPane.addTab("Cadastro", null, abaCadastro, null);
+		abaCadastro.setLayout(null);
 		
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setBounds(356, 275, 98, 26);
-		panel.add(btnLimpar);
+		JLabel lblCtps = new JLabel("CTPS");
+		lblCtps.setBounds(12, 85, 97, 21);
+		abaCadastro.add(lblCtps);
+		lblCtps.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
-		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.setBounds(248, 275, 98, 26);
-		panel.add(btnExcluir);
+		tfCTPS = new JTextField();
+		tfCTPS.setBounds(99, 81, 194, 29);
+		abaCadastro.add(tfCTPS);
+		tfCTPS.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		tfCTPS.setColumns(10);
 		
-		JLabel lblNascimento = new JLabel("Nascimento");
-		lblNascimento.setBounds(311, 86, 97, 21);
-		panel.add(lblNascimento);
-		lblNascimento.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		JLabel lblCpf = new JLabel("CPF");
+		lblCpf.setBounds(12, 50, 97, 21);
+		abaCadastro.add(lblCpf);
+		lblCpf.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		tfCPF = new JFormattedTextField(MascarasCampos.getCPFMask());
+		tfCPF.setBounds(99, 46, 194, 29);
+		abaCadastro.add(tfCPF);
+		tfCPF.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		tfCPF.setColumns(10);
 		
-		tfSalario = new JTextField();
-		tfSalario.setBounds(99, 154, 194, 29);
-		panel.add(tfSalario);
-		tfSalario.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		tfSalario.setColumns(10);
+		JLabel lblCargo = new JLabel("Cargo");
+		lblCargo.setBounds(12, 196, 97, 21);
+		abaCadastro.add(lblCargo);
+		lblCargo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Consulta", null, panel_1, null);
-		panel_1.setLayout(null);
+		cbCargo = new JComboBox<Cargo>();
+		cbCargo.setBounds(99, 192, 194, 29);
+		abaCadastro.add(cbCargo);
+		cbCargo.setModel(new DefaultComboBoxModel(Cargo.values()));
+		cbCargo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		
+		JLabel lblComisso = new JLabel("Comiss\u00E3o");
+		lblComisso.setBounds(309, 236, 97, 21);
+		abaCadastro.add(lblComisso);
+		lblComisso.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		
+		JTextField tfComissao = new JTextField();
+		tfComissao.setBounds(388, 232, 194, 29);
+		abaCadastro.add(tfComissao);
+		tfComissao.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		tfComissao.setColumns(10);
+		
+		JLabel lblEndereo = new JLabel("Endere\u00E7o");
+		lblEndereo.setBounds(12, 154, 97, 21);
+		abaCadastro.add(lblEndereo);
+		lblEndereo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		
+		JTextField tfEndereco = new JTextField();
+		tfEndereco.setBounds(99, 150, 440, 29);
+		abaCadastro.add(tfEndereco);
+		tfEndereco.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		tfEndereco.setColumns(10);
+		
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setBounds(12, 17, 97, 21);
+		abaCadastro.add(lblNome);
+		lblNome.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		
+		tfNome = new JTextField();
+		tfNome.setBounds(99, 10, 344, 29);
+		abaCadastro.add(tfNome);
+		tfNome.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		tfNome.setColumns(10);
+		
+				JTextField tfDate = new DateTextField();
+				tfDate.setBounds(479, 49, 131, 29);
+				abaCadastro.add(tfDate);
+				
+				JLabel lblSalrio = new JLabel("Sal\u00E1rio");
+				lblSalrio.setBounds(12, 240, 97, 21);
+				abaCadastro.add(lblSalrio);
+				lblSalrio.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+				
+				JLabel lblTelefone = new JLabel("Telefone");
+				lblTelefone.setBounds(12, 117, 97, 21);
+				abaCadastro.add(lblTelefone);
+				lblTelefone.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+				tfTelefone = new JFormattedTextField(MascarasCampos.getTelefoneMask());
+				tfTelefone.setBounds(99, 117, 194, 29);
+				abaCadastro.add(tfTelefone);
+				tfTelefone.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+				tfTelefone.setColumns(10);
+				
+				btnSalvar = new JButton("Salvar");
+				btnSalvar.setBounds(192, 295, 98, 26);
+				abaCadastro.add(btnSalvar);
+				
+				btnLimpar = new JButton("Limpar");
+				btnLimpar.setBounds(360, 295, 98, 26);
+				abaCadastro.add(btnLimpar);
+				
+				JLabel lblNascimento = new JLabel("Data de nascimento");
+				lblNascimento.setBounds(318, 53, 151, 21);
+				abaCadastro.add(lblNascimento);
+				lblNascimento.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+				
+				tfSalario = new JTextField();
+				tfSalario.setBounds(99, 236, 194, 29);
+				abaCadastro.add(tfSalario);
+				tfSalario.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+				tfSalario.setColumns(10);
+		
+		JPanel abaConsulta = new JPanel();
+		tabbedPane.addTab("Consulta", null, abaConsulta, null);
+		abaConsulta.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 64, 637, 153);
-		panel_1.add(scrollPane);
+		scrollPane.setBounds(10, 64, 637, 243);
+		abaConsulta.add(scrollPane);
 		
 		table = new JTable();
 		table.setBorder(null);
@@ -250,17 +230,21 @@ public class FuncionarioView {
 			}
 		});
 		
-		JButton btnBuscar_1 = new JButton("Buscar");
-		btnBuscar_1.setBounds(239, 26, 98, 26);
-		panel_1.add(btnBuscar_1);
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(239, 26, 98, 26);
+		abaConsulta.add(btnBuscar);
 		
 		tfFiltro = new JTextField();
 		tfFiltro.setBounds(12, 29, 195, 26);
-		panel_1.add(tfFiltro);
+		abaConsulta.add(tfFiltro);
 		tfFiltro.setColumns(10);
 		
-		JLabel lblDigiteONome = new JLabel("Digite o Nome para buscar");
+		JLabel lblDigiteONome = new JLabel("Digite o cpf para buscar");
 		lblDigiteONome.setBounds(12, 12, 163, 16);
-		panel_1.add(lblDigiteONome);
+		abaConsulta.add(lblDigiteONome);
+		
+		btnExcluir = new JButton("Excluir");
+		btnExcluir.setBounds(463, 26, 98, 26);
+		abaConsulta.add(btnExcluir);
 	}
 }
