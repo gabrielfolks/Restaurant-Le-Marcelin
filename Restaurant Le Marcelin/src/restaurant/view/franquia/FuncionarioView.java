@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -12,33 +16,45 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
 
+import restaurant.control.franquia.FuncionarioController;
+import restaurant.control.franquia.LoginController;
+import restaurant.model.franquia.Funcionario;
+import restaurant.model.franquia.Login;
 import restaurant.util.Cargo;
 import restaurant.util.DateTextField;
 import restaurant.util.MascarasCampos;
+import restaurant.view.tablemodel.FuncionarioTableModel;
 
-public class FuncionarioView {
+public class FuncionarioView extends JFrame implements ActionListener{
 
-	private JFrame frmRestaurantLeMarcelin;
+	private FuncionarioController funcionarioController;
 	private JTextField tfCTPS;
 	private JFormattedTextField tfCPF;
-	private JComboBox cbCargo;
+	private JComboBox<Cargo> cbCargo;
 	private JTextField tfNome;
 	private JTextField tfSalario;
 	private JFormattedTextField tfTelefone;
 	private JTable table;
-	private JTextField tfFiltro;
+	private JTextField tfBuscaCPF;
 	private JButton btnBuscar;
 	private JButton btnExcluir;
 	private JButton btnSalvar;
 	private JButton btnLimpar;
+	private JTextField tfDate;
+	private JTextField tfEndereco;
+	private JLabel lblComisso;
+	private JTextField tfComissao;
+	private FuncionarioTableModel funcionarioTableModel;
+	private JTextField tfLogin;
+	private JTextField tfSenha;
+	private LoginController loginController;
 
 	/**
 	 * Launch the application.
@@ -48,7 +64,7 @@ public class FuncionarioView {
 			public void run() {
 				try {
 					FuncionarioView window = new FuncionarioView();
-					window.frmRestaurantLeMarcelin.setVisible(true);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -67,30 +83,17 @@ public class FuncionarioView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmRestaurantLeMarcelin = new JFrame();
-		frmRestaurantLeMarcelin.setTitle("Restaurant Le Marcelin - Funcion\u00E1rio");
-		frmRestaurantLeMarcelin.getContentPane().setBackground(Color.WHITE);
-		frmRestaurantLeMarcelin.setBounds(100, 100, 680, 410);
-		frmRestaurantLeMarcelin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		funcionarioController = new FuncionarioController();
+		loginController = new LoginController();
+		this.setTitle("Restaurant Le Marcelin - Funcion\u00E1rio");
+		this.getContentPane().setBackground(Color.WHITE);
+		this.setBounds(100, 100, 825, 477);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		frmRestaurantLeMarcelin.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		this.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		frmRestaurantLeMarcelin.getContentPane().add(tabbedPane);
-		try {
-			MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
-			cpfMask.setValidCharacters("0123456789");
-			cpfMask.setValueContainsLiteralCharacters(false);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-		try {
-			MaskFormatter telefoneMask = new MaskFormatter("(##) #####-####");
-			telefoneMask.setValidCharacters("0123456789");
-			telefoneMask.setValueContainsLiteralCharacters(false);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		this.getContentPane().add(tabbedPane);
 		
 		JPanel abaCadastro = new JPanel();
 		tabbedPane.addTab("Cadastro", null, abaCadastro, null);
@@ -122,18 +125,18 @@ public class FuncionarioView {
 		abaCadastro.add(lblCargo);
 		lblCargo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
-		cbCargo = new JComboBox<Cargo>();
+		cbCargo = new JComboBox<>();
 		cbCargo.setBounds(99, 192, 194, 29);
 		abaCadastro.add(cbCargo);
-		cbCargo.setModel(new DefaultComboBoxModel(Cargo.values()));
+		cbCargo.setModel(new DefaultComboBoxModel<Cargo>(Cargo.values()));
 		cbCargo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
-		JLabel lblComisso = new JLabel("Comiss\u00E3o");
+		lblComisso = new JLabel("Comiss\u00E3o");
 		lblComisso.setBounds(309, 236, 97, 21);
 		abaCadastro.add(lblComisso);
 		lblComisso.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
-		JTextField tfComissao = new JTextField();
+		tfComissao = new JTextField();
 		tfComissao.setBounds(388, 232, 194, 29);
 		abaCadastro.add(tfComissao);
 		tfComissao.setFont(new Font("Segoe UI", Font.PLAIN, 15));
@@ -144,7 +147,7 @@ public class FuncionarioView {
 		abaCadastro.add(lblEndereo);
 		lblEndereo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
-		JTextField tfEndereco = new JTextField();
+		tfEndereco = new JTextField();
 		tfEndereco.setBounds(99, 150, 440, 29);
 		abaCadastro.add(tfEndereco);
 		tfEndereco.setFont(new Font("Segoe UI", Font.PLAIN, 15));
@@ -161,7 +164,7 @@ public class FuncionarioView {
 		tfNome.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		tfNome.setColumns(10);
 		
-				JTextField tfDate = new DateTextField();
+				tfDate = new DateTextField();
 				tfDate.setBounds(479, 49, 131, 29);
 				abaCadastro.add(tfDate);
 				
@@ -181,11 +184,13 @@ public class FuncionarioView {
 				tfTelefone.setColumns(10);
 				
 				btnSalvar = new JButton("Salvar");
-				btnSalvar.setBounds(192, 295, 98, 26);
+				btnSalvar.setBounds(194, 358, 98, 26);
+				btnSalvar.addActionListener(this);
 				abaCadastro.add(btnSalvar);
 				
 				btnLimpar = new JButton("Limpar");
-				btnLimpar.setBounds(360, 295, 98, 26);
+				btnLimpar.setBounds(362, 358, 98, 26);
+				btnLimpar.addActionListener(this);
 				abaCadastro.add(btnLimpar);
 				
 				JLabel lblNascimento = new JLabel("Data de nascimento");
@@ -198,53 +203,137 @@ public class FuncionarioView {
 				abaCadastro.add(tfSalario);
 				tfSalario.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 				tfSalario.setColumns(10);
+				
+				tfLogin = new JTextField();
+				tfLogin.setBounds(115, 291, 86, 20);
+				abaCadastro.add(tfLogin);
+				tfLogin.setColumns(10);
+				
+				tfSenha = new JTextField();
+				tfSenha.setBounds(412, 291, 86, 20);
+				abaCadastro.add(tfSenha);
+				tfSenha.setColumns(10);
+				
+				JLabel lblSenha = new JLabel("Senha");
+				lblSenha.setBounds(336, 294, 46, 14);
+				abaCadastro.add(lblSenha);
+				
+				JLabel lblLogin = new JLabel("Login");
+				lblLogin.setBounds(28, 294, 46, 14);
+				abaCadastro.add(lblLogin);
 		
 		JPanel abaConsulta = new JPanel();
 		tabbedPane.addTab("Consulta", null, abaConsulta, null);
 		abaConsulta.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 64, 637, 243);
+		scrollPane.setBounds(10, 64, 744, 298);
 		abaConsulta.add(scrollPane);
 		
 		table = new JTable();
 		table.setBorder(null);
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"ID", "Nome", "CPF", "CTPS", "Cargo", "Sal\u00E1rio", "Comiss\u00E3o", "Nascimento", "Telefone"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, String.class, String.class, String.class, Float.class, Float.class, Object.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		funcionarioTableModel = new FuncionarioTableModel();
+		table.setModel(funcionarioTableModel);
 		
 		btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(this);
 		btnBuscar.setBounds(239, 26, 98, 26);
 		abaConsulta.add(btnBuscar);
 		
-		tfFiltro = new JTextField();
-		tfFiltro.setBounds(12, 29, 195, 26);
-		abaConsulta.add(tfFiltro);
-		tfFiltro.setColumns(10);
+		tfBuscaCPF = new JTextField();
+		tfBuscaCPF.setBounds(12, 29, 195, 26);
+		abaConsulta.add(tfBuscaCPF);
+		tfBuscaCPF.setColumns(10);
 		
 		JLabel lblDigiteONome = new JLabel("Digite o cpf para buscar");
 		lblDigiteONome.setBounds(12, 12, 163, 16);
 		abaConsulta.add(lblDigiteONome);
 		
 		btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(this);
 		btnExcluir.setBounds(463, 26, 98, 26);
 		abaConsulta.add(btnExcluir);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		Funcionario funcionario;
+		Login login;
+		
+		if (arg0.getSource() == btnSalvar) {
+			funcionario = new Funcionario();
+			
+			funcionario.setNome(tfNome.getText());
+			funcionario.setCpf((String) tfCPF.getValue());
+			funcionario.setComissao(Float.parseFloat(tfComissao.getText()));	
+			funcionario.setCargo((Cargo) cbCargo.getSelectedItem());
+			funcionario.setCtps(tfCTPS.getText());
+			funcionario.setEndereco(tfEndereco.getText());
+				
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			Date dataNascimento;
+			
+				try {
+					dataNascimento = sdf.parse(tfDate.getText());
+					funcionario.setNascimento(dataNascimento);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			
+			funcionario.setSalario(Float.parseFloat(tfSalario.getText()));
+			funcionario.setTelefone((String) tfTelefone.getValue());
+				
+			login = new Login();
+			
+			login.setUsuario(tfLogin.getText());
+			login.setSenha(tfSenha.getText());
+				
+			loginController.adicionarLogin(login);
+			login = loginController.pesquisarUsuario(login.getUsuario());
+				
+			funcionario.setLogin(login);
+			
+			funcionarioController.adicionarFuncionario(funcionario);
+			limparCampos();			
+			
+		} else if (arg0.getSource() == btnLimpar) {
+			limparCampos();
+			
+			
+		} else if (arg0.getSource() == btnBuscar) {
+			funcionario = funcionarioController.buscarFuncionario(tfBuscaCPF.getText());
+			
+			if (funcionario == null){
+				JOptionPane.showMessageDialog(null, "Funcionário não encontrado", "Erro!",
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				funcionarioTableModel.adicionarFuncionario(funcionario);
+			}
+			
+			
+		} else if (arg0.getSource() == btnExcluir) {
+			if (table.getSelectedRow() == -1) {
+				JOptionPane.showMessageDialog(null, "Nenhum funcionário foi selecionado", "Erro!", 
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				funcionario = funcionarioTableModel.getFuncionario(table.getSelectedRow());
+				funcionarioTableModel.removerFuncionario(table.getSelectedRow());
+				funcionarioController.removerFuncionario(funcionario);
+			}
+		}
+		
+	}
+
+	private void limparCampos() {
+		tfNome.setText("");
+		tfCPF.setText("");
+		tfComissao.setText("");
+		cbCargo.setSelectedIndex(-1);
+		tfCTPS.setText("");
+		tfEndereco.setText("");
+		tfDate.setText("");
+		tfSalario.setText("");
+		tfTelefone.setText("");
 	}
 }

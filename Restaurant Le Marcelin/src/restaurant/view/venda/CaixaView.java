@@ -1,27 +1,22 @@
 package restaurant.view.venda;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
-import java.awt.GridLayout;
-import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JComboBox;
 
-public class CaixaView {
+public class CaixaView extends JFrame implements ActionListener {
 
-	private JFrame frmCaixa;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 	private JTextField txtTotal;
@@ -36,7 +31,7 @@ public class CaixaView {
 			public void run() {
 				try {
 					CaixaView window = new CaixaView();
-					window.frmCaixa.setVisible(true);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,15 +50,14 @@ public class CaixaView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmCaixa = new JFrame();
-		frmCaixa.setTitle("Caixa");
-		frmCaixa.setBounds(100, 100, 760, 468);
-		frmCaixa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmCaixa.getContentPane().setLayout(null);
+		this.setTitle("Caixa");
+		this.setBounds(100, 100, 760, 468);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setLayout(null);
 		
 		JPanel panelBotoes = new JPanel();
 		panelBotoes.setBounds(10, 386, 724, 44);
-		frmCaixa.getContentPane().add(panelBotoes);
+		this.getContentPane().add(panelBotoes);
 		
 		JButton btnAbrirCaixa = new JButton("Abrir Caixa");
 		panelBotoes.add(btnAbrirCaixa);
@@ -76,7 +70,7 @@ public class CaixaView {
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 36, 724, 323);
-		frmCaixa.getContentPane().add(panel);
+		this.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JPanel panel_2 = new JPanel();
@@ -129,11 +123,11 @@ public class CaixaView {
 		
 		JLabel lblStatus = new JLabel("Status");
 		lblStatus.setBounds(10, 9, 55, 16);
-		frmCaixa.getContentPane().add(lblStatus);
+		this.getContentPane().add(lblStatus);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(51, 0, 380, 29);
-		frmCaixa.getContentPane().add(panel_1);		
+		this.getContentPane().add(panel_1);		
 		 
 		JRadioButton rdbtnAberto = new JRadioButton("Aberto");
 		buttonGroup_1.add(rdbtnAberto);
@@ -151,5 +145,11 @@ public class CaixaView {
 		panel_1.add(txtTotal);
 		txtTotal.setColumns(10);
 	
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

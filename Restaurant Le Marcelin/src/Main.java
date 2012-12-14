@@ -1,3 +1,5 @@
+import restaurant.util.Cargo;
+import restaurant.util.DiaSemana;
 import restaurant.view.franquia.LoginView;
 
 
@@ -8,9 +10,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		LoginView login = new restaurant.view.franquia.LoginView();
-		login.setLocationRelativeTo(null);
-		login.setVisible(true);
+		System.out.println(DiaSemana.DOM.toString());
 		
 
 	}

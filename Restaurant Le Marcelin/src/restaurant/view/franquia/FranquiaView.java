@@ -151,10 +151,12 @@ public class FranquiaView extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		Franquia f = new Franquia();
+		Franquia f;
 		FranquiaController fc = new FranquiaController();
 		
 		if (arg0.getSource() == btnSalvar) {
+			f =  new Franquia();
+			
 			f.setRazao(tfRazao.getText());
 			f.setFantasia(tfFantasia.getText());
 			f.setEndereco(tfEndereco.getText());
