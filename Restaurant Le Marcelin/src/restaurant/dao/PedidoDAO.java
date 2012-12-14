@@ -1,8 +1,10 @@
 package restaurant.dao;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import restaurant.dao.interfaces.IPedidoDAO;
+import restaurant.model.venda.Comanda;
 import restaurant.model.venda.Pedido;
 
 public class PedidoDAO implements IPedidoDAO {
@@ -35,6 +37,12 @@ public class PedidoDAO implements IPedidoDAO {
 
 	@Override
 	public Pedido procurarPedido(int numeroPedido) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Pedido> listarPedidos(Comanda c) {
 		// TODO Auto-generated method stub
 		return null;
 	}

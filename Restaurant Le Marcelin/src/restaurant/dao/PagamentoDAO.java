@@ -13,7 +13,7 @@ import restaurant.dao.jdbc.Conexao;
 import restaurant.model.venda.Caixa;
 import restaurant.model.venda.Comanda;
 import restaurant.model.venda.Pagamento;
-import restaurant.util.Forma;
+import restaurant.util.FormaPagamento;
 
 public class PagamentoDAO implements IPagamentoDAO {
 
@@ -123,7 +123,7 @@ public class PagamentoDAO implements IPagamentoDAO {
 				p.setIdPagamento(rs.getInt("idPagamento"));
 				String forma = rs.getString("formaPagamento");
 				
-				for (Forma f : Forma.values()) {
+				for (FormaPagamento f : FormaPagamento.values()) {
 					if (forma.equals(f.toString()))
 						p.setFormaPagamento(f);						
 				}				

@@ -6,11 +6,15 @@ import restaurant.util.FormaPagamento;
 
 public class Pagamento {
 	
+	private int idPagamento;
+	
+
 	private FormaPagamento formaPagamento;
 	private int quantidadeParecelas;
 	private HashSet<Comanda> comandas;
 	
 	public Pagamento() {
+		idPagamento = 0;
 		formaPagamento = FormaPagamento.DINHEIRO;
 		quantidadeParecelas = 0;
 		comandas = new HashSet<>();
@@ -51,6 +55,14 @@ public class Pagamento {
 		for (Comanda c : comandas) 			
 			valor += c.getValor();		
 		return valor;
+	}
+	
+	public int getIdPagamento() {
+		return idPagamento;
+	}
+
+	public void setIdPagamento(int idPagamento) {
+		this.idPagamento = idPagamento;
 	}
 	
 
