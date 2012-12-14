@@ -5,6 +5,7 @@ import restaurant.dao.interfaces.IClienteDAO;
 import restaurant.dao.interfaces.IFornecedorDAO;
 import restaurant.dao.interfaces.IFranquiaDAO;
 import restaurant.dao.interfaces.IFuncionarioDAO;
+import restaurant.dao.interfaces.ILoginDAO;
 import restaurant.dao.interfaces.IMesaDAO;
 import restaurant.dao.interfaces.IPedidoDAO;
 import restaurant.dao.interfaces.IProdutoDAO;
@@ -48,5 +49,9 @@ public class DAOFactory {
 
 	public static IProdutoDAO createProdutoDAO() {
 		return new ProdutoDAO();
+	}
+
+	public static ILoginDAO createLoginDAO() {
+		return new LoginDAO();
 	}
 }
