@@ -51,7 +51,7 @@ public class CaixaController {
 	}
 	
 	public ArrayList<Pagamento> listaTransacoes(){
-		return null; 
+		return pagDAO.listar(); 
 	}
 	
 	

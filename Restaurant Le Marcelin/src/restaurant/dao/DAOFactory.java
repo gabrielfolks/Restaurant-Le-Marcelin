@@ -3,6 +3,7 @@ package restaurant.dao;
 import restaurant.dao.interfaces.ICaixaDAO;
 import restaurant.dao.interfaces.ICardapioDAO;
 import restaurant.dao.interfaces.IClienteDAO;
+import restaurant.dao.interfaces.IComandaDAO;
 import restaurant.dao.interfaces.IFornecedorDAO;
 import restaurant.dao.interfaces.IFranquiaDAO;
 import restaurant.dao.interfaces.IFuncionarioDAO;
@@ -12,7 +13,6 @@ import restaurant.dao.interfaces.IPedidoDAO;
 import restaurant.dao.interfaces.IProdutoDAO;
 import restaurant.dao.interfaces.IReservaDAO;
 import restaurant.model.venda.Caixa;
-import restaurant.model.venda.Comanda;
 
 public class DAOFactory {
 
@@ -58,15 +58,11 @@ public class DAOFactory {
 		return new CaixaDAO();
 	}
 	
-	public static IPagamentoDAO createPagamentoDAO(Caixa caixa){		
-		return new PagamentoDAO(caixa);			
+	public static IPagamentoDAO createPagamentoDAO(Caixa c){
+		return new PagamentoDAO(c);
 	}
 	
-	public static IPagamentoDAO createPagamentoDAO(Caixa caixa, Comanda comanda){
-		
-		PagamentoDAO pag = new PagamentoDAO(caixa);
-		pag.setCom(comanda);
-		
-		return pag;
+	public static IComandaDAO createComandaDAO(){
+		return new ComandaDAO();
 	}
 }

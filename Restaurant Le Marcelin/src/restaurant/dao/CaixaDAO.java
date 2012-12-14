@@ -118,6 +118,9 @@ public class CaixaDAO implements ICaixaDAO {
 				c.setValorInicial(rs.getFloat("valorInicial"));				
 			}			
 			
+			con.close();
+			stm.close();
+			rs.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
