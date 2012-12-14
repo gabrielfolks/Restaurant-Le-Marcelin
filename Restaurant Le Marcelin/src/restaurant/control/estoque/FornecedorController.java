@@ -15,7 +15,7 @@ public class FornecedorController {
 	public void adicionarFornecedor(Fornecedor f){		
 		fornecedorDAO.adicionar(f);
 	}
-	
+		
 	public void removerFornecedor(Fornecedor f){
 		fornecedorDAO.remover(f);
 	}

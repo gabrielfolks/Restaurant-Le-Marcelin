@@ -28,8 +28,8 @@ public class ComandaController {
 		c.adicionaPedido(p);
 	}
 	
-	public void fecharComanda(Comanda c){
-		
+	public void fecharComanda(Comanda c) throws Exception{		
+		throw new Exception("Não implementado ainda");
 	}
 	
 	public Comanda buscarComanda(int codigo){

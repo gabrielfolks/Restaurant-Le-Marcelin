@@ -44,12 +44,21 @@ public class CaixaController {
 		}
 	}
 	
+	/**
+	 * Retorna o caixa atual persistido no banco. Através dele será possível verificar o status
+	 * e impedir que o usuário abra ou feche novamente.
+	 * @return
+	 */
 	public Caixa getCaixaAtual(){
 		
 		return caixaDAO.obtemCaixaCorrente();
 		
 	}
 	
+	/**
+	 * Retorna todos os pagamentos, sangrias e suprimentos feitos no caixa atual.
+	 * @return
+	 */
 	public ArrayList<Pagamento> listaTransacoes(){
 		return pagDAO.listar(); 
 	}
