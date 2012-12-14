@@ -1,7 +1,6 @@
 package restaurant.control.reserva;
 
 import java.util.Date;
-import java.util.Set;
 
 import restaurant.dao.DAOFactory;
 import restaurant.dao.interfaces.IReservaDAO;
@@ -23,7 +22,7 @@ public class ReservaController {
 		reservaDAO.atualizar(reserva);
 	}
 	
-	public Set<Reserva> procurarPorData(Date dataReserva) {
+	public Reserva procurarPorData(Date dataReserva) {
 		return reservaDAO.procurarPorData(dataReserva);
 	}
 	

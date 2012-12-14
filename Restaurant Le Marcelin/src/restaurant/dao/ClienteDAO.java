@@ -102,15 +102,15 @@ public class ClienteDAO implements IClienteDAO {
 			cliente.setTelefone(resultSet.getString(3));
 			cliente.setEndereco(resultSet.getString(4));
 			cliente.setCpf(resultSet.getString(5));
-			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.err.println("Não há resultados para esta busca");
 			cliente = null;
 		} finally {
 			fecharTudo();
 		}
 		
 		return cliente;
+		
 	}
 
 

@@ -60,9 +60,12 @@ public class DAOFactory {
 	
 	public static IPagamentoDAO createPagamentoDAO(Caixa c){
 		return new PagamentoDAO(c);
+<<<<<<< HEAD
 	}
 	
 	public static IComandaDAO createComandaDAO(){
 		return new ComandaDAO();
+=======
+>>>>>>> branch 'jdbc2' of https://github.com/edumunk/Restaurant-Le-Marcelin.git
 	}
 }

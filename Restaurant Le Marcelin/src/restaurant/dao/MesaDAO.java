@@ -5,8 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import restaurant.dao.interfaces.IMesaDAO;
 import restaurant.dao.jdbc.Conexao;
@@ -20,8 +20,6 @@ public class MesaDAO implements IMesaDAO {
 	private CallableStatement callStmt;
 	
 	protected MesaDAO(){}
-	
-	//(in p_numero int, in p_zona int, in p_f BOOLEAN, in p_lug int)
 	
 	@Override
 	public void adicionar(Mesa mesa) {
@@ -49,16 +47,15 @@ public class MesaDAO implements IMesaDAO {
 	public void atualizar(Mesa mesa) {
 		connection = Conexao.getConexao();
 		
-		String sql = "{call altera_mesa(?,?,?,?,?)}";
+		String sql = "{call altera_mesa(?,?,?,?)}";
 		
 		try {
 			callStmt = connection.prepareCall(sql);
 			
-			callStmt.setInt(1, mesa.getId());
-			callStmt.setInt(2, mesa.getNumero());
-			callStmt.setString(3, mesa.getZona());
-			callStmt.setBoolean(4, mesa.isFumante());
-			callStmt.setInt(5, mesa.getLugares());
+			callStmt.setInt(1, mesa.getNumero());
+			callStmt.setString(2, mesa.getZona());
+			callStmt.setBoolean(3, mesa.isFumante());
+			callStmt.setInt(4, mesa.getLugares());
 						
 			callStmt.execute();
 		} catch (SQLException e) {
@@ -66,18 +63,18 @@ public class MesaDAO implements IMesaDAO {
 		} finally {
 			fecharTudo();
 		}
-	}
+}
 
 	@Override
 	public void remover(Mesa mesa) {
 		connection = Conexao.getConexao();
 		
-		String sql = "DELETE FROM Mesa WHERE idMesa = ?";
+		String sql = "DELETE FROM Mesa WHERE numero = ?";
 		
 		try {
 			prepStmt = connection.prepareStatement(sql);
 		
-			prepStmt.setInt(1, mesa.getId());
+			prepStmt.setInt(1, mesa.getNumero());
 			
 			prepStmt.execute();
 		} catch (SQLException e) {
@@ -100,24 +97,24 @@ public class MesaDAO implements IMesaDAO {
 			
 			resultSet = prepStmt.executeQuery();
 			
-			resultSet.first();
-			
-			mesa = criarMesa();
+			if (resultSet.first())
+				mesa = criarMesa();
+			else 
+				mesa = null;
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
+			mesa = null;
 		}
 	
-		
-		
 		return mesa;
 	}
 
 	@Override
-	public Set<Mesa> pesquisarPorZona(String zona) {
+	public List<Mesa> pesquisarPorZona(String zona) {
 		connection  = Conexao.getConexao();
 		
-		Set<Mesa> mesas = new HashSet<>();
+		List<Mesa> mesas = new ArrayList<>();
 		
 		String sql = "SELECT idMesa, numero, zona, fumante, lugares FROM Mesa WHERE zona = ?";
 		
