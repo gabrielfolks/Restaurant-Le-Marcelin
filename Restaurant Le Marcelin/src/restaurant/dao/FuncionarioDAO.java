@@ -100,9 +100,6 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 		}
 	}
 
-//	  idFranquia, ctps, nome, endereco,
-//    cpf, nascimento, salario, comissao, cargo, idLogin
-
 	@Override
 	public Funcionario pesquisarPorCPF(String cpf) {
 		connection = Conexao.getConexao();
@@ -110,11 +107,8 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 		Funcionario funcionario = new Funcionario();
 		
 		String sql = "SELECT idFuncionario, ctps, nome, endereco, " +
-				"cpf, nascimento, salario, comissao, cargo, " +
-				"l.idLogin, l.usuario, fq.idFranquia, fq.razao, fq.cnpj" +
-				"FROM Funcionario " +
-				"NATURAL JOIN Login l NATURAL JOIN Franquia fq" +
-				"WHERE cpf = ?";
+				"cpf, nascimento, salario, comissao, cargo "+
+				"FROM Funcionario WHERE cpf = ?";
 		
 		try {
 			prepStmt = connection.prepareStatement(sql);
@@ -125,10 +119,19 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			
 			resultSet.first();
 			
-			criarFuncionario();
-		
+			funcionario.setId(resultSet.getInt(1));
+			funcionario.setCtps(resultSet.getString(2));
+			funcionario.setNome(resultSet.getString(3));
+			funcionario.setEndereco(resultSet.getString(4));
+			funcionario.setCpf(resultSet.getString(5));
+			funcionario.setNascimento(new java.util.Date(resultSet.getDate(6).getTime()));
+			funcionario.setSalario(resultSet.getFloat(7));
+			funcionario.setComissao(resultSet.getFloat(8));
+			funcionario.setCargo(Cargo.valueOf(resultSet.getString(9)));
+				
 		} catch (SQLException e) {
 			e.printStackTrace();
+			funcionario = null;
 		} finally {
 			fecharTudo();
 		}
