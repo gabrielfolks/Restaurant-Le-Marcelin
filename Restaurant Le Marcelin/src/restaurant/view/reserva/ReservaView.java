@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -48,14 +49,14 @@ public class ReservaView extends JFrame implements ActionListener {
 	private JButton btnCancelarReserva;
 	private ReservaTableModel reservaTableModel;
 	private JFormattedTextField tfCPF;
-	private JTextField tfNumeroMesa;
+	private JTextField tfNumeroMesaReserva;
 	private MesaController mesaController;
 	private ReservaController reservaController;
-	private JSpinner spDataConsulta;
-	private JSpinner spDataCadastro;
 	private JSpinner spLugares;
 	private JCheckBox cbFumante;
 	private JButton btnAlterarMesa;
+	private JSpinner spDataReserva;
+	private JSpinner spDataConsulta;
 	
 	/**
 	 * Launch the application.
@@ -108,12 +109,6 @@ public class ReservaView extends JFrame implements ActionListener {
 		lblDatahora.setBounds(10, 82, 84, 16);
 		abaReservar.add(lblDatahora);
 		
-		spDataCadastro = new JSpinner();
-		spDataCadastro.setModel(new SpinnerDateModel(new Date(1352944800000L), null, new Date(32535136800000L), Calendar.DAY_OF_YEAR));
-		spDataCadastro.setFont(new Font("Dialog", Font.PLAIN, 15));
-		spDataCadastro.setBounds(104, 80, 165, 20);
-		abaReservar.add(spDataCadastro);
-		
 		btnSalvarReserva = new JButton("Salvar reserva");
 		btnSalvarReserva.setBounds(84, 130, 140, 26);
 		btnSalvarReserva.addActionListener(this);
@@ -129,11 +124,16 @@ public class ReservaView extends JFrame implements ActionListener {
 		lblNMesa.setBounds(12, 45, 46, 14);
 		abaReservar.add(lblNMesa);
 		
-		tfNumeroMesa = new JTextField();
-		tfNumeroMesa.setBackground(Color.WHITE);
-		tfNumeroMesa.setBounds(84, 42, 86, 20);
-		abaReservar.add(tfNumeroMesa);
-		tfNumeroMesa.setColumns(10);
+		tfNumeroMesaReserva = new JTextField();
+		tfNumeroMesaReserva.setBackground(Color.WHITE);
+		tfNumeroMesaReserva.setBounds(84, 42, 86, 20);
+		abaReservar.add(tfNumeroMesaReserva);
+		tfNumeroMesaReserva.setColumns(10);
+		
+		spDataReserva = new JSpinner();
+		spDataReserva.setModel(new SpinnerDateModel(new Date(1355450400000L), new Date(1355450400000L), null, Calendar.DAY_OF_YEAR));
+		spDataReserva.setBounds(94, 82, 119, 20);
+		abaReservar.add(spDataReserva);
 		
 		JPanel abaConsultarReservas = new JPanel();
 		abaConsultarReservas.setBackground(Color.WHITE);
@@ -145,12 +145,7 @@ public class ReservaView extends JFrame implements ActionListener {
 		label.setFont(new Font("Dialog", Font.BOLD, 15));
 		abaConsultarReservas.add(label);
 		
-		spDataConsulta = new JSpinner();
-		spDataConsulta.setModel(new SpinnerDateModel(new Date(1352944800000L), new Date(1352944800000L), new Date(32535136800000L), Calendar.DAY_OF_YEAR));
-		spDataConsulta.setBounds(100, 5, 173, 24);
-		spDataConsulta.setFont(new Font("Dialog", Font.PLAIN, 15));
-		abaConsultarReservas.add(spDataConsulta);
-		
+			
 		btnListar = new JButton("Listar");
 		btnListar.setBounds(12, 42, 98, 26);
 		btnListar.addActionListener(this);
@@ -165,8 +160,14 @@ public class ReservaView extends JFrame implements ActionListener {
 		scrollPane.setViewportView(table);
 		
 		btnCancelarReserva = new JButton("Cancelar reserva");
-		btnCancelarReserva.setBounds(160, 44, 130, 23);
+		btnCancelarReserva.setBounds(160, 42, 179, 25);
+		btnCancelarReserva.addActionListener(this);
 		abaConsultarReservas.add(btnCancelarReserva);
+		
+		spDataConsulta = new JSpinner();
+		spDataConsulta.setModel(new SpinnerDateModel(new Date(1355450400000L), new Date(1355450400000L), null, Calendar.DAY_OF_YEAR));
+		spDataConsulta.setBounds(118, 9, 154, 20);
+		abaConsultarReservas.add(spDataConsulta);
 		
 		JPanel abaMesas = new JPanel();
 		abaMesas.setBackground(Color.WHITE);
@@ -255,14 +256,21 @@ public class ReservaView extends JFrame implements ActionListener {
 			reserva = new Reserva();
 			
 			reserva.setCliente(pesquisarCliente());
-			reserva.setMesa(pesquisarMesa());
-			reserva.setData((Date) spDataConsulta.getValue());
+			
+			int numeroMesa = Integer.parseInt(tfNumeroMesaReserva.getText());
+			
+			reserva.setMesa(mesaController.pesquisarMesaPorNumero(numeroMesa));
+			reserva.setData((Date) spDataReserva.getValue());
+			
+			System.out.println(spDataReserva.getValue());
 			
 			reservaController.adicionar(reserva);
-			
+						
 		}
 		
 		else if (e.getSource() == btnListar) {
+			reservaTableModel.limpar();
+			
 			reserva = reservaController.procurarPorData((Date) spDataConsulta.getValue());
 				
 				if (reserva == null) {
@@ -331,7 +339,7 @@ public class ReservaView extends JFrame implements ActionListener {
 		Cliente	cliente = new ClienteController().pesquisarPorCPF((String) tfCPF.getValue());
 		
 		if (cliente == null) {
-			JOptionPane.showConfirmDialog(null, "Cliente não encontrado");
+			JOptionPane.showMessageDialog(null, "Cliente não encontrado");
 		}
 		
 		return cliente;
