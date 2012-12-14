@@ -13,35 +13,32 @@ public enum DiaSemana {
 	@Override
 	public String toString() {
 		String diaDaSemana = "";
-		
+
 		switch(this) {
-			case DOM:
-				diaDaSemana = "Domingo";
-			
-			case SEG:
-				diaDaSemana = "Segunda-feira";
-			
-			case TER:
-				diaDaSemana = "Terça-feira";
-			
-			case QUA:
-				diaDaSemana = "Quarta-feira";
-				
-			case QUI:
-				diaDaSemana = "Quinta-feira";
-			
-			case SEX:
-				diaDaSemana = "Sexta-feira";
-				
-			case SAB:
-				diaDaSemana = "Sábado";
-			
-			default:
-				diaDaSemana = "";
+		case DOM:
+			return diaDaSemana = "Domingo";
+		case SEG:
+			return diaDaSemana = "Segunda-feira";
+		case TER:
+			return diaDaSemana = "Terça-feira";
+
+		case QUA:
+			return diaDaSemana = "Quarta-feira";
+
+		case QUI:
+			return diaDaSemana = "Quinta-feira";
+
+		case SEX:
+			return diaDaSemana = "Sexta-feira";
+
+		case SAB:
+			return diaDaSemana = "Sábado";
+
+		default:
+			return diaDaSemana = "";
 		}
-		
-		
-		return diaDaSemana;
+
+
 	}
 			
 			

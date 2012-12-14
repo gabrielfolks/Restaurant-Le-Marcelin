@@ -102,6 +102,7 @@ public class ClienteDAO implements IClienteDAO {
 			cliente.setTelefone(resultSet.getString(3));
 			cliente.setEndereco(resultSet.getString(4));
 			cliente.setCpf(resultSet.getString(5));
+			
 		} catch (SQLException e) {
 			System.err.println("Não há resultados para esta busca");
 			cliente = null;
@@ -110,7 +111,6 @@ public class ClienteDAO implements IClienteDAO {
 		}
 		
 		return cliente;
-		
 	}
 
 

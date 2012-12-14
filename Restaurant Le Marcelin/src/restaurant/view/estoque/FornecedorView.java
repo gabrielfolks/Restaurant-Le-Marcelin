@@ -220,6 +220,5 @@ public class FornecedorView extends JFrame implements ActionListener {
 		tfCNPJ.setText("");
 		tfTelefone.setText("");
 	}
-		
-	
+
 }

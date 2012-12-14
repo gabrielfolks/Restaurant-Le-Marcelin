@@ -26,7 +26,5 @@ public enum Cargo {
 		}
 			return cargo;
 	}
-	
-	
 
 }

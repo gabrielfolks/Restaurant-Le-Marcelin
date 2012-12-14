@@ -63,7 +63,7 @@ public class MesaDAO implements IMesaDAO {
 		} finally {
 			fecharTudo();
 		}
-}
+	}
 
 	@Override
 	public void remover(Mesa mesa) {

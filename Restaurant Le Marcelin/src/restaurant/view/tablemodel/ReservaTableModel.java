@@ -77,6 +77,12 @@ public class ReservaTableModel extends AbstractTableModel {
 		fireTableRowsInserted(indice, indice + reservas.size());
 	}
 	
+	public void removerReserva(int indiceLinha) {
+		linhas.remove(indiceLinha);
+		
+		fireTableRowsDeleted(indiceLinha, indiceLinha);
+	}
+	
 	public void limpar() {
 		linhas.clear();
 		

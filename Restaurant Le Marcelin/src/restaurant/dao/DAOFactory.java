@@ -7,6 +7,7 @@ import restaurant.dao.interfaces.IComandaDAO;
 import restaurant.dao.interfaces.IFornecedorDAO;
 import restaurant.dao.interfaces.IFranquiaDAO;
 import restaurant.dao.interfaces.IFuncionarioDAO;
+import restaurant.dao.interfaces.ILoginDAO;
 import restaurant.dao.interfaces.IMesaDAO;
 import restaurant.dao.interfaces.IPagamentoDAO;
 import restaurant.dao.interfaces.IPedidoDAO;
@@ -64,5 +65,9 @@ public class DAOFactory {
 	
 	public static IComandaDAO createComandaDAO(){
 		return new ComandaDAO();
+	}
+
+	public static ILoginDAO createLoginDAO() {
+		return new LoginDAO();
 	}
 }

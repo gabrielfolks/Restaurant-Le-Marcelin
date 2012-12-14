@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,15 +23,13 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+
 import restaurant.control.reserva.ClienteController;
 import restaurant.model.reserva.Cliente;
 import restaurant.util.MascarasCampos;
 import restaurant.view.tablemodel.ClienteTableModel;
 
-	
-
 public class ClienteView extends JFrame implements ActionListener {
-
 	private JFormattedTextField tfCpf;
 	private JTextField tfEndereco;
 	private JTextField tfNome;
@@ -94,7 +93,6 @@ public class ClienteView extends JFrame implements ActionListener {
 		lblCpf.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblCpf.setBounds(12, 42, 49, 24);
 		abaCadastro.add(lblCpf);
-
 		tfCpf = new JFormattedTextField(MascarasCampos.getCPFMask());
 		tfCpf.setFont(new Font("Dialog", Font.PLAIN, 15));
 		tfCpf.setBounds(134, 42, 206, 24);

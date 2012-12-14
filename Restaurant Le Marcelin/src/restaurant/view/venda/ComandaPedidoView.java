@@ -1,38 +1,31 @@
 package restaurant.view.venda;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.MatteBorder;
-import java.awt.Color;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
-import java.awt.ScrollPane;
 import java.awt.Font;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import javax.swing.JLabel;
-@SuppressWarnings("all")
-public class ComandaPedidoView {
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-	private JFrame frmComandaRestaurant;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.BevelBorder;
+import javax.swing.table.DefaultTableModel;
+
+import net.miginfocom.swing.MigLayout;
+
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
+
+public class ComandaPedidoView extends JFrame implements ActionListener {
+
 	private JTextField textField;
 	private JTable table;
 
@@ -44,7 +37,7 @@ public class ComandaPedidoView {
 			public void run() {
 				try {
 					ComandaPedidoView window = new ComandaPedidoView();
-					window.frmComandaRestaurant.setVisible(true);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -63,16 +56,15 @@ public class ComandaPedidoView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmComandaRestaurant = new JFrame();
-		frmComandaRestaurant.setTitle("Comanda - Restaurant Le Marcelin");
-		frmComandaRestaurant.setBounds(100, 100, 800, 572);
-		frmComandaRestaurant.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frmComandaRestaurant.getContentPane().setLayout(null);
+		this.setTitle("Comanda - Restaurant Le Marcelin");
+		this.setBounds(100, 100, 800, 572);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setBounds(0, 1, 792, 47);
-		frmComandaRestaurant.getContentPane().add(panel);
+		this.getContentPane().add(panel);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Dialog", Font.PLAIN, 13));
@@ -90,7 +82,7 @@ public class ComandaPedidoView {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_1.setBounds(0, 60, 792, 327);
-		frmComandaRestaurant.getContentPane().add(panel_1);
+		this.getContentPane().add(panel_1);
 		
 		table = new JTable();
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -127,7 +119,7 @@ public class ComandaPedidoView {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_2.setBounds(0, 399, 792, 155);
-		frmComandaRestaurant.getContentPane().add(panel_2);
+		this.getContentPane().add(panel_2);
 		panel_2.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
@@ -203,7 +195,13 @@ public class ComandaPedidoView {
 	}
 
 	public JFrame getFrmComandaRestaurant() {
-		return frmComandaRestaurant;
+		return this;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

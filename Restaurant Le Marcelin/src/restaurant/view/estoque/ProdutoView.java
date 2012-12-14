@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -26,9 +29,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.BevelBorder;
 
-public class ProdutoView {
+public class ProdutoView extends JFrame implements ActionListener {
 
-	private JFrame frmRestaurantLeMarcelin;
 	private JTextField tfCodigo;
 	private JTextField tfNome;
 	private JTextField tfValor;
@@ -51,7 +53,7 @@ public class ProdutoView {
 			public void run() {
 				try {
 					ProdutoView window = new ProdutoView();
-					window.frmRestaurantLeMarcelin.setVisible(true);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,14 +72,13 @@ public class ProdutoView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmRestaurantLeMarcelin = new JFrame();
-		frmRestaurantLeMarcelin.setTitle("Restaurant Le Marcelin - Mercadorias");
-		frmRestaurantLeMarcelin.setBounds(100, 100, 804, 465);
-		frmRestaurantLeMarcelin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmRestaurantLeMarcelin.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		this.setTitle("Restaurant Le Marcelin - Mercadorias");
+		this.setBounds(100, 100, 804, 465);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel = new JPanel();
-		frmRestaurantLeMarcelin.getContentPane().add(panel);
+		this.getContentPane().add(panel);
 		panel.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		JPanel painelProduto = new JPanel();
@@ -259,5 +260,11 @@ public class ProdutoView {
 		comboBox.setBounds(137, 5, 164, 25);
 		comboBox.setModel(new DefaultComboBoxModel(Medida.values()));
 		abaInsumo.add(comboBox);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
